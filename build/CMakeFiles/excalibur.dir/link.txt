@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/excalibur.dir/link.d CMakeFiles/excalibur.dir/src/parser.c.o CMakeFiles/excalibur.dir/src/forward_sim.c.o CMakeFiles/excalibur.dir/main.c.o -o excalibur

@@ -10,5 +10,5 @@ add_executable(excalibur
 )
 
 target_include_directories(excalibur PRIVATE include)
-target_compile_options(excalibur PRIVATE -Ofast)
+target_compile_options(excalibur PRIVATE -Ofast -march=native -flto)
 

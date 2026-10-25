@@ -24,7 +24,9 @@ void main() {
   {
     tm_step(tm);
   } 
+
   int64_t c2 = get_current_time_ms();
 
   printf("diff: %llu", c2-c1);
+  //save_tm(tm);
 }

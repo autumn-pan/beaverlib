@@ -20,6 +20,9 @@ events:
     names:
       - "uname"
     candidate_directories:
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/usr/bin/"
@@ -29,13 +32,20 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
       - "/bin/"
     searched_directories:
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/uname"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/uname"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/uname"
       - "/usr/local/sbin/uname"
       - "/usr/local/bin/uname"
     found: "/usr/bin/uname"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -45,6 +55,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "message-v1"
     backtrace:
@@ -55,11 +66,11 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "/usr/share/cmake/Modules/CMakeNinjaFindMake.cmake:5 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeUnixFindMake.cmake:5 (find_program)"
       - "CMakeLists.txt:3 (project)"
     mode: "program"
     variable: "CMAKE_MAKE_PROGRAM"
-    description: "Program used to build from build.ninja files."
+    description: "Path to a program."
     settings:
       SearchFramework: "NEVER"
       SearchAppBundle: "NEVER"
@@ -69,10 +80,13 @@ events:
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "ninja-build"
-      - "ninja"
-      - "samu"
+      - "gmake"
+      - "make"
+      - "smake"
     candidate_directories:
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/usr/bin/"
@@ -82,17 +96,32 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     searched_directories:
-      - "/usr/local/sbin/ninja-build"
-      - "/usr/local/sbin/ninja"
-      - "/usr/local/sbin/samu"
-      - "/usr/local/bin/ninja-build"
-      - "/usr/local/bin/ninja"
-      - "/usr/local/bin/samu"
-      - "/usr/bin/ninja-build"
-    found: "/usr/bin/ninja"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/gmake"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/gmake"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/gmake"
+      - "/usr/local/sbin/gmake"
+      - "/usr/local/bin/gmake"
+      - "/usr/bin/gmake"
+      - "/var/lib/flatpak/exports/bin/gmake"
+      - "/usr/lib/jvm/default/bin/gmake"
+      - "/usr/bin/site_perl/gmake"
+      - "/usr/bin/vendor_perl/gmake"
+      - "/usr/bin/core_perl/gmake"
+      - "/usr/lib/rustup/bin/gmake"
+      - "/home/autumn/Programs/Jarvis/gmake"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/make"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/make"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/make"
+      - "/usr/local/sbin/make"
+      - "/usr/local/bin/make"
+    found: "/usr/bin/make"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -102,6 +131,68 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:64 (_cmake_find_compiler)"
+      - "CMakeLists.txt:3 (project)"
+    mode: "program"
+    variable: "CMAKE_C_COMPILER"
+    description: "C compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "cc"
+      - "gcc"
+      - "cl"
+      - "bcc"
+      - "xlc"
+      - "icx"
+      - "clang"
+    candidate_directories:
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "/usr/local/sbin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/usr/lib/jvm/default/bin/"
+      - "/usr/bin/site_perl/"
+      - "/usr/bin/vendor_perl/"
+      - "/usr/bin/core_perl/"
+      - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
+    searched_directories:
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/cc"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/cc"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/cc"
+      - "/usr/local/sbin/cc"
+      - "/usr/local/bin/cc"
+    found: "/usr/bin/cc"
+    search_context:
+      ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
+        - "/usr/local/sbin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/usr/lib/jvm/default/bin"
+        - "/usr/bin/site_perl"
+        - "/usr/bin/vendor_perl"
+        - "/usr/bin/core_perl"
+        - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -129,6 +220,9 @@ events:
     found: "/usr/share/cmake/Modules/CMakeCCompilerId.c.in"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -138,6 +232,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "message-v1"
     backtrace:
@@ -147,7 +242,7 @@ events:
       - "CMakeLists.txt:3 (project)"
     message: |
       Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-      Compiler: /usr/bin/gcc 
+      Compiler: /usr/bin/cc 
       Build flags: 
       Id flags:  
       
@@ -181,6 +276,9 @@ events:
       - "ar"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -189,9 +287,13 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     found: "/usr/bin/ar"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -201,6 +303,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -222,6 +325,9 @@ events:
       - "ranlib"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -230,9 +336,13 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     found: "/usr/bin/ranlib"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -242,6 +352,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -263,6 +374,9 @@ events:
       - "strip"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -271,9 +385,13 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     found: "/usr/bin/strip"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -283,6 +401,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -304,6 +423,9 @@ events:
       - "ld"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -312,9 +434,13 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     found: "/usr/bin/ld"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -324,6 +450,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -345,6 +472,9 @@ events:
       - "nm"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -353,9 +483,13 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     found: "/usr/bin/nm"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -365,6 +499,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -386,6 +521,9 @@ events:
       - "objdump"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -394,9 +532,13 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     found: "/usr/bin/objdump"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -406,6 +548,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -427,6 +570,9 @@ events:
       - "objcopy"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -435,9 +581,13 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     found: "/usr/bin/objcopy"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -447,6 +597,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -468,6 +619,9 @@ events:
       - "readelf"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -476,9 +630,13 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     found: "/usr/bin/readelf"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -488,6 +646,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -509,6 +668,9 @@ events:
       - "dlltool"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -517,8 +679,12 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     searched_directories:
       - "/usr/bin/dlltool"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/dlltool"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/dlltool"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/dlltool"
       - "/usr/local/sbin/dlltool"
       - "/usr/local/bin/dlltool"
       - "/var/lib/flatpak/exports/bin/dlltool"
@@ -527,9 +693,13 @@ events:
       - "/usr/bin/vendor_perl/dlltool"
       - "/usr/bin/core_perl/dlltool"
       - "/usr/lib/rustup/bin/dlltool"
+      - "/home/autumn/Programs/Jarvis/dlltool"
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -539,6 +709,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -560,6 +731,9 @@ events:
       - "addr2line"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -568,9 +742,13 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     found: "/usr/bin/addr2line"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -580,6 +758,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -601,6 +780,9 @@ events:
       - "tapi"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -609,8 +791,12 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     searched_directories:
       - "/usr/bin/tapi"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/tapi"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/tapi"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/tapi"
       - "/usr/local/sbin/tapi"
       - "/usr/local/bin/tapi"
       - "/var/lib/flatpak/exports/bin/tapi"
@@ -619,9 +805,13 @@ events:
       - "/usr/bin/vendor_perl/tapi"
       - "/usr/bin/core_perl/tapi"
       - "/usr/lib/rustup/bin/tapi"
+      - "/home/autumn/Programs/Jarvis/tapi"
     found: false
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -631,6 +821,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -655,6 +846,9 @@ events:
       - "gcc-ar"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -663,8 +857,12 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     searched_directories:
       - "/usr/bin/gcc-ar-16.1"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/gcc-ar-16.1"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-16.1"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-16.1"
       - "/usr/local/sbin/gcc-ar-16.1"
       - "/usr/local/bin/gcc-ar-16.1"
       - "/var/lib/flatpak/exports/bin/gcc-ar-16.1"
@@ -673,7 +871,11 @@ events:
       - "/usr/bin/vendor_perl/gcc-ar-16.1"
       - "/usr/bin/core_perl/gcc-ar-16.1"
       - "/usr/lib/rustup/bin/gcc-ar-16.1"
+      - "/home/autumn/Programs/Jarvis/gcc-ar-16.1"
       - "/usr/bin/gcc-ar-16"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/gcc-ar-16"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-16"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-16"
       - "/usr/local/sbin/gcc-ar-16"
       - "/usr/local/bin/gcc-ar-16"
       - "/var/lib/flatpak/exports/bin/gcc-ar-16"
@@ -682,7 +884,11 @@ events:
       - "/usr/bin/vendor_perl/gcc-ar-16"
       - "/usr/bin/core_perl/gcc-ar-16"
       - "/usr/lib/rustup/bin/gcc-ar-16"
+      - "/home/autumn/Programs/Jarvis/gcc-ar-16"
       - "/usr/bin/gcc-ar16"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/gcc-ar16"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar16"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar16"
       - "/usr/local/sbin/gcc-ar16"
       - "/usr/local/bin/gcc-ar16"
       - "/var/lib/flatpak/exports/bin/gcc-ar16"
@@ -691,9 +897,13 @@ events:
       - "/usr/bin/vendor_perl/gcc-ar16"
       - "/usr/bin/core_perl/gcc-ar16"
       - "/usr/lib/rustup/bin/gcc-ar16"
+      - "/home/autumn/Programs/Jarvis/gcc-ar16"
     found: "/usr/bin/gcc-ar"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -703,6 +913,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "find-v1"
     backtrace:
@@ -727,6 +938,9 @@ events:
       - "gcc-ranlib"
     candidate_directories:
       - "/usr/bin/"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "/usr/local/sbin/"
       - "/usr/local/bin/"
       - "/var/lib/flatpak/exports/bin/"
@@ -735,8 +949,12 @@ events:
       - "/usr/bin/vendor_perl/"
       - "/usr/bin/core_perl/"
       - "/usr/lib/rustup/bin/"
+      - "/home/autumn/Programs/Jarvis/"
     searched_directories:
       - "/usr/bin/gcc-ranlib-16.1"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/gcc-ranlib-16.1"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-16.1"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-16.1"
       - "/usr/local/sbin/gcc-ranlib-16.1"
       - "/usr/local/bin/gcc-ranlib-16.1"
       - "/var/lib/flatpak/exports/bin/gcc-ranlib-16.1"
@@ -745,7 +963,11 @@ events:
       - "/usr/bin/vendor_perl/gcc-ranlib-16.1"
       - "/usr/bin/core_perl/gcc-ranlib-16.1"
       - "/usr/lib/rustup/bin/gcc-ranlib-16.1"
+      - "/home/autumn/Programs/Jarvis/gcc-ranlib-16.1"
       - "/usr/bin/gcc-ranlib-16"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/gcc-ranlib-16"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-16"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-16"
       - "/usr/local/sbin/gcc-ranlib-16"
       - "/usr/local/bin/gcc-ranlib-16"
       - "/var/lib/flatpak/exports/bin/gcc-ranlib-16"
@@ -754,7 +976,11 @@ events:
       - "/usr/bin/vendor_perl/gcc-ranlib-16"
       - "/usr/bin/core_perl/gcc-ranlib-16"
       - "/usr/lib/rustup/bin/gcc-ranlib-16"
+      - "/home/autumn/Programs/Jarvis/gcc-ranlib-16"
       - "/usr/bin/gcc-ranlib16"
+      - "/home/autumn/.nvm/versions/node/v22.14.0/bin/gcc-ranlib16"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib16"
+      - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib16"
       - "/usr/local/sbin/gcc-ranlib16"
       - "/usr/local/bin/gcc-ranlib16"
       - "/var/lib/flatpak/exports/bin/gcc-ranlib16"
@@ -763,9 +989,13 @@ events:
       - "/usr/bin/vendor_perl/gcc-ranlib16"
       - "/usr/bin/core_perl/gcc-ranlib16"
       - "/usr/lib/rustup/bin/gcc-ranlib16"
+      - "/home/autumn/Programs/Jarvis/gcc-ranlib16"
     found: "/usr/bin/gcc-ranlib"
     search_context:
       ENV{PATH}:
+        - "/home/autumn/.nvm/versions/node/v22.14.0/bin"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/debugCommand"
+        - "/home/autumn/.config/Code/User/globalStorage/github.copilot-chat/copilotCli"
         - "/usr/local/sbin"
         - "/usr/local/bin"
         - "/usr/bin"
@@ -775,6 +1005,7 @@ events:
         - "/usr/bin/vendor_perl"
         - "/usr/bin/core_perl"
         - "/usr/lib/rustup/bin"
+        - "/home/autumn/Programs/Jarvis"
   -
     kind: "try_compile-v1"
     backtrace:
@@ -784,8 +1015,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-IIuMJ4"
-      binary: "/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-IIuMJ4"
+      source: "/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-X8Bnvj"
+      binary: "/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-X8Bnvj"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -794,19 +1025,22 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: false
       stdout: |
-        Change Dir: '/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-IIuMJ4'
+        Change Dir: '/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-X8Bnvj'
         
-        Run Build Command(s): /usr/bin/ninja -v cmTC_14b7e
-        [1/2] /usr/bin/gcc   -v -o CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_83d7d/fast
+        /usr/bin/make  -f CMakeFiles/cmTC_83d7d.dir/build.make CMakeFiles/cmTC_83d7d.dir/build
+        make[1]: Entering directory '/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-X8Bnvj'
+        Building C object CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o
+        /usr/bin/cc   -v -o CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
         Using built-in specs.
-        COLLECT_GCC=/usr/bin/gcc
+        COLLECT_GCC=/usr/bin/cc
         Target: x86_64-pc-linux-gnu
         Configured with: ../gcc/configure --enable-languages=ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++,rust,cobol --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-gcc-major-version-only --with-linker-hash-style=gnu --with-system-zlib --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-fixincludes --disable-libssp --disable-libstdcxx-pch --disable-werror
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 16.1.1 20260625 (GCC) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_14b7e.dir/'
-         /usr/lib/gcc/x86_64-pc-linux-gnu/16/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_14b7e.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/cc2SvCmD.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_83d7d.dir/'
+         /usr/lib/gcc/x86_64-pc-linux-gnu/16/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_83d7d.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/cczbZtMo.s
         GNU C23 (GCC) version 16.1.1 20260625 (x86_64-pc-linux-gnu)
         	compiled by GNU C version 16.1.1 20260625, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.4.1, isl version isl-0.28-GMP
         
@@ -820,15 +1054,16 @@ events:
          /usr/include
         End of search list.
         Compiler executable checksum: f256a4180e9512463d37b6651434666a
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_14b7e.dir/'
-         as -v --64 -o CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o /tmp/cc2SvCmD.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_83d7d.dir/'
+         as -v --64 -o CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o /tmp/cczbZtMo.s
         GNU assembler version 2.46.1 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.46.1
         COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/
         LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../:/lib/:/usr/lib/
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.'
-        [2/2] : && /usr/bin/gcc  -v -Wl,-v CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -o cmTC_14b7e   && :
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_83d7d
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_83d7d.dir/link.txt --verbose=1
         Using built-in specs.
-        COLLECT_GCC=/usr/bin/gcc
+        COLLECT_GCC=/usr/bin/cc
         COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper
         Target: x86_64-pc-linux-gnu
         Configured with: ../gcc/configure --enable-languages=ada,c,c++,d,fortran,go,lto,m2,objc,obj-c++,rust,cobol --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-gcc-major-version-only --with-linker-hash-style=gnu --with-system-zlib --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-fixincludes --disable-libssp --disable-libstdcxx-pch --disable-werror
@@ -837,12 +1072,14 @@ events:
         gcc version 16.1.1 20260625 (GCC) 
         COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/
         LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../:/lib/:/usr/lib/
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_14b7e' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_14b7e.'
-         /usr/lib/gcc/x86_64-pc-linux-gnu/16/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEcIsp8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_14b7e /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_83d7d' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_83d7d.'
+         /usr/lib/gcc/x86_64-pc-linux-gnu/16/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccel8lHx.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_83d7d /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o
         collect2 version 16.1.1 20260625
-        /usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEcIsp8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_14b7e /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o
+        /usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccel8lHx.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_83d7d /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o
         GNU ld (GNU Binutils) 2.46.1
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_14b7e' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_14b7e.'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_83d7d' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_83d7d.'
+        /usr/bin/cc  -v -Wl,-v CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o -o cmTC_83d7d
+        make[1]: Leaving directory '/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-X8Bnvj'
         
       exitCode: 0
   -
@@ -875,19 +1112,22 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild))("|,| |$)]
-        ignore line: [Change Dir: '/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-IIuMJ4']
+        ignore line: [Change Dir: '/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-X8Bnvj']
         ignore line: []
-        ignore line: [Run Build Command(s): /usr/bin/ninja -v cmTC_14b7e]
-        ignore line: [[1/2] /usr/bin/gcc   -v -o CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_83d7d/fast]
+        ignore line: [/usr/bin/make  -f CMakeFiles/cmTC_83d7d.dir/build.make CMakeFiles/cmTC_83d7d.dir/build]
+        ignore line: [make[1]: Entering directory '/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/CMakeScratch/TryCompile-X8Bnvj']
+        ignore line: [Building C object CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
         ignore line: [Using built-in specs.]
-        ignore line: [COLLECT_GCC=/usr/bin/gcc]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
         ignore line: [Target: x86_64-pc-linux-gnu]
         ignore line: [Configured with: ../gcc/configure --enable-languages=ada c c++ d fortran go lto m2 objc obj-c++ rust cobol --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-gcc-major-version-only --with-linker-hash-style=gnu --with-system-zlib --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-fixincludes --disable-libssp --disable-libstdcxx-pch --disable-werror]
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 16.1.1 20260625 (GCC) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_14b7e.dir/']
-        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/16/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_14b7e.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/cc2SvCmD.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_83d7d.dir/']
+        ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/16/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_83d7d.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/cczbZtMo.s]
         ignore line: [GNU C23 (GCC) version 16.1.1 20260625 (x86_64-pc-linux-gnu)]
         ignore line: [	compiled by GNU C version 16.1.1 20260625  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.4.1  isl version isl-0.28-GMP]
         ignore line: []
@@ -901,15 +1141,16 @@ events:
         ignore line: [ /usr/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: f256a4180e9512463d37b6651434666a]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_14b7e.dir/']
-        ignore line: [ as -v --64 -o CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o /tmp/cc2SvCmD.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_83d7d.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o /tmp/cczbZtMo.s]
         ignore line: [GNU assembler version 2.46.1 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.46.1]
         ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../:/lib/:/usr/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.']
-        ignore line: [[2/2] : && /usr/bin/gcc  -v -Wl -v CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -o cmTC_14b7e   && :]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_83d7d]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_83d7d.dir/link.txt --verbose=1]
         ignore line: [Using built-in specs.]
-        ignore line: [COLLECT_GCC=/usr/bin/gcc]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
         ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper]
         ignore line: [Target: x86_64-pc-linux-gnu]
         ignore line: [Configured with: ../gcc/configure --enable-languages=ada c c++ d fortran go lto m2 objc obj-c++ rust cobol --enable-bootstrap --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://gitlab.archlinux.org/archlinux/packaging/packages/gcc/-/issues --with-build-config=bootstrap-lto --with-gcc-major-version-only --with-linker-hash-style=gnu --with-system-zlib --enable-cet=auto --enable-checking=release --enable-clocale=gnu --enable-default-pie --enable-default-ssp --enable-gnu-indirect-function --enable-gnu-unique-object --enable-libstdcxx-backtrace --enable-link-serialization=1 --enable-linker-build-id --enable-lto --enable-multilib --enable-plugin --enable-shared --enable-threads=posix --disable-fixincludes --disable-libssp --disable-libstdcxx-pch --disable-werror]
@@ -918,13 +1159,13 @@ events:
         ignore line: [gcc version 16.1.1 20260625 (GCC) ]
         ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
         ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/16/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../:/lib/:/usr/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_14b7e' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_14b7e.']
-        link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/16/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEcIsp8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_14b7e /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_83d7d' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_83d7d.']
+        link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/16/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccel8lHx.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_83d7d /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o]
           arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/collect2] ==> ignore
           arg [-plugin] ==> ignore
           arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so] ==> ignore
           arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper] ==> ignore
-          arg [-plugin-opt=-fresolution=/tmp/ccEcIsp8.res] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccel8lHx.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s_asneeded] ==> ignore
           arg [-plugin-opt=-pass-through=-latomic_asneeded] ==> ignore
@@ -940,7 +1181,7 @@ events:
           arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
           arg [-pie] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_14b7e] ==> ignore
+          arg [cmTC_83d7d] ==> ignore
           arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o]
           arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o]
           arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o]
@@ -952,7 +1193,7 @@ events:
           arg [-L/lib] ==> dir [/lib]
           arg [-L/usr/lib] ==> dir [/usr/lib]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o] ==> ignore
           arg [-lgcc] ==> lib [gcc]
           arg [-lgcc_s_asneeded] ==> lib [gcc_s_asneeded]
           arg [-latomic_asneeded] ==> lib [atomic_asneeded]
@@ -962,9 +1203,9 @@ events:
           arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o]
           arg [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o] ==> obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o]
         ignore line: [collect2 version 16.1.1 20260625]
-        link line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEcIsp8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_14b7e /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o] ==> linker [/usr/bin/ld]
-        link line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEcIsp8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_14b7e /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o] ==> linker architecture flags [-m;elf]
-        ignore line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEcIsp8.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_14b7e /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_14b7e.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o]
+        link line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccel8lHx.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_83d7d /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o] ==> linker [/usr/bin/ld]
+        link line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccel8lHx.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_83d7d /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o] ==> linker architecture flags [-m;elf]
+        ignore line: [/usr/bin/ld -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/16/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/16/lto-wrapper -plugin-opt=-fresolution=/tmp/ccel8lHx.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s_asneeded --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_83d7d /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/16 -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../.. -L/lib -L/usr/lib -v CMakeFiles/cmTC_83d7d.dir/CMakeCCompilerABI.c.o -lgcc -lgcc_s_asneeded -latomic_asneeded -lc -lgcc -lgcc_s_asneeded /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crtn.o]
         linker tool for 'C': /usr/bin/ld -m;elf
         collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/Scrt1.o] ==> [/usr/lib/Scrt1.o]
         collapse obj [/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o] ==> [/usr/lib/crti.o]

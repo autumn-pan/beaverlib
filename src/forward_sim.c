@@ -51,7 +51,7 @@ void extend_right_tape(TuringMachine *tm)
   tm->right_tape_size++;
 }
 
-inline bool read(TuringMachine *tm)
+bool read(TuringMachine *tm)
 {
   uint64_t *half_tape = tm->right_tape;
 
@@ -61,7 +61,7 @@ inline bool read(TuringMachine *tm)
   return 1U & (half_tape[tm->head_pos / 64] >> (tm->head_pos % 64));
 }
 
-inline void write(TuringMachine *tm, bool value)
+void write(TuringMachine *tm, bool value)
 {
   if (!tm->head_dir)
   {
@@ -79,7 +79,7 @@ inline void write(TuringMachine *tm, bool value)
   }
 }
 
-inline void move(TuringMachine *tm, bool dir)
+void move(TuringMachine *tm, bool dir)
 {
   // TODO: optimize this
   if (tm->head_dir == 1)
@@ -90,8 +90,6 @@ inline void move(TuringMachine *tm, bool dir)
       tm->head_dir = 0;
     else
       tm->head_pos--;
-    if (tm->head_pos == 64)
-      extend_right_tape(tm);
   }
   else
   {
@@ -101,13 +99,23 @@ inline void move(TuringMachine *tm, bool dir)
       tm->head_dir = 1;
     else
       tm->head_pos++;
-    if (tm->head_pos == 64)
+    if (tm->head_pos == 64*tm->left_tape_size-1)
       extend_left_tape(tm);
   }
 }
 
 void tm_step(TuringMachine *tm)
 {
+  if(tm->head_dir)
+  {
+    if(tm->head_pos / 64 > tm->right_tape_size)
+      extend_right_tape(tm);
+  }
+  else
+  {
+    if(tm->head_pos / 64 > tm->left_tape_size)
+      extend_left_tape(tm);
+  }
   bool read_value = read(tm);
 
   Instruction instr = tm->trans_table[read_value][tm->state - 'A'];
@@ -122,4 +130,22 @@ void dump_tm(TuringMachine *tm)
   printf("Head dir: %i\n", tm->head_dir);
   printf("Head pos: %llu\n", tm->head_pos);
   printf("State: %c\n", tm->state);
+}
+
+void save_tm(TuringMachine *tm)
+{
+  printf("rts: %llu", tm->right_tape_size);
+  printf("lts: %llu", tm->left_tape_size);
+
+  for(int i = 0; i < tm->left_tape_size; i++)
+    printf("%llu ", tm->left_tape[i]);
+
+  printf("| ");
+
+  for(int i = 0; i < tm->right_tape_size; i++)
+    printf("%llu ", tm->right_tape[i]);
+
+  printf("| %llu", tm->head_pos);
+  printf("| %llu", tm->head_dir);
+  printf("| %c", tm->state);
 }

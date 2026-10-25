@@ -3,12 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 Instruction **parse_tm(const char *line)
 {
   Instruction **instructions = malloc(2*sizeof(Instruction *));
 
-  for(int i = 0; i< 2; i++)
+  for(int i = 0; i < 2; i++)
     instructions[i] = malloc(sizeof(Instruction) * 6);
   
   const char *ptr = line;

@@ -1,5 +1,0 @@
-# ninja log v7
-1	35	1792957086824281042	CMakeFiles/excalibur.dir/src/parser.c.o	58e44322c9f90876
-2	37	1792957086825442384	CMakeFiles/excalibur.dir/src/forward_sim.c.o	a3f94923710936a5
-2	42	1792957086825793974	CMakeFiles/excalibur.dir/main.c.o	1dc86cdabed284b3
-43	265	1792957086865686459	excalibur	97b24610a316916e

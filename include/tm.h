@@ -25,12 +25,11 @@ typedef struct
   size_t right_tape_size;
 
 
-  uint64_t head_pos;
+  int64_t head_pos;
   bool head_dir; // Whether or not the head is on the right half-tape
 
   char state;
   Instruction **trans_table; // Transition table
 } TuringMachine;
-
 
 #endif

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "tm.h"
 
@@ -29,100 +30,124 @@ TuringMachine *tm_new(Instruction **trans_table)
 }
 
 // append an additional uint64_t to a half-tape
-void extend_half_tape(uint64_t *tape)
+static void extend_half_tape(uint64_t **tape, size_t *tape_size)
 {
-  size_t tape_size = sizeof(*tape) / sizeof(uint64_t);
-  tape = realloc(tape, sizeof(*tape) + sizeof(uint64_t));
+  size_t new_size = *tape_size + 1;
+  uint64_t *new_tape = realloc(*tape, new_size * sizeof(uint64_t));
 
-  tape[tape_size] = 0;
+  if (!new_tape)
+    return;
+
+  // zero out the new tape
+  memset(new_tape + *tape_size, 0, sizeof(uint64_t));
+  *tape = new_tape;
+  *tape_size = new_size;
 }
 
 // append an additional uint64_t to the left half-tape
 void extend_left_tape(TuringMachine *tm)
 {
-  extend_half_tape(tm->left_tape);
-  tm->left_tape_size++;
+  extend_half_tape(&tm->left_tape, &tm->left_tape_size);
 }
 
 // append an additional uint64_t to a right half-tape
 void extend_right_tape(TuringMachine *tm)
 {
-  extend_half_tape(tm->right_tape);
-  tm->right_tape_size++;
+  extend_half_tape(&tm->right_tape, &tm->right_tape_size);
 }
 
 bool read(TuringMachine *tm)
 {
-  uint64_t *half_tape = tm->right_tape;
+  if (tm->head_pos >= 0)
+  {
+    size_t word = (size_t)tm->head_pos / 64;
+    size_t bit = (size_t)tm->head_pos % 64;
+    return (tm->right_tape[word] >> bit) & 1U;
+  }
 
-  if (!tm->head_dir)
-    half_tape = tm->left_tape;
-
-  return 1U & (half_tape[tm->head_pos / 64] >> (tm->head_pos % 64));
+  size_t word = (size_t)(-(tm->head_pos + 1)) / 64;
+  size_t bit = (size_t)(-(tm->head_pos + 1)) % 64;
+  return (tm->left_tape[word] >> bit) & 1U;
 }
 
 void write(TuringMachine *tm, bool value)
 {
-  if (!tm->head_dir)
+  if (tm->head_pos >= 0)
   {
+    size_t word = (size_t)tm->head_pos / 64;
+    size_t bit = (size_t)tm->head_pos % 64;
+
     if (value)
-      tm->left_tape[tm->head_pos / 64] |= (1 << (tm->head_pos % 64));
+      tm->right_tape[word] |= (1ULL << bit);
     else
-      tm->left_tape[tm->head_pos / 64] &= ~(1 << (tm->head_pos % 64));
+      tm->right_tape[word] &= ~(1ULL << bit);
+    return;
   }
+
+  size_t word = (size_t)(-(tm->head_pos + 1)) / 64;
+  size_t bit = (size_t)(-(tm->head_pos + 1)) % 64;
+
+  if (value)
+    tm->left_tape[word] |= (1ULL << bit);
   else
-  {
-    if (value)
-      tm->right_tape[tm->head_pos / 64] |= (1 << (tm->head_pos % 64));
-    else
-      tm->right_tape[tm->head_pos / 64] &= ~(1 << (tm->head_pos % 64));
-  }
+    tm->left_tape[word] &= ~(1ULL << bit);
 }
 
 void move(TuringMachine *tm, bool dir)
 {
-  // TODO: optimize this
-  if (tm->head_dir == 1)
-  {
-    if (dir)
-      tm->head_pos++;
-    else if (!dir && tm->head_pos == 0)
-      tm->head_dir = 0;
-    else
-      tm->head_pos--;
-  }
+  if (dir)
+    tm->head_pos++;
   else
-  {
-    if (dir && tm->head_pos > 0)
-      tm->head_pos--;
-    else if (dir && tm->head_pos == 0)
-      tm->head_dir = 1;
-    else
-      tm->head_pos++;
-    if (tm->head_pos == 64*tm->left_tape_size-1)
-      extend_left_tape(tm);
-  }
-}
+    tm->head_pos--;
 
-void tm_step(TuringMachine *tm)
-{
-  if(tm->head_dir)
+  if (tm->head_pos >= 0)
   {
-    if(tm->head_pos / 64 > tm->right_tape_size)
+    tm->head_dir = 1;
+    if ((size_t)tm->head_pos / 64 >= tm->right_tape_size)
       extend_right_tape(tm);
   }
   else
   {
-    if(tm->head_pos / 64 > tm->left_tape_size)
+    tm->head_dir = 0;
+    if ((size_t)(-(tm->head_pos + 1)) / 64 >= tm->left_tape_size)
       extend_left_tape(tm);
   }
+}
+
+int tm_step(TuringMachine *tm)
+{
+  if (!tm || tm->state == '-')
+  {
+    printf("Halted!");
+    return 0;
+  }
+
+  if (tm->head_pos >= 0)
+  {
+    if ((size_t)tm->head_pos / 64 >= tm->right_tape_size)
+      extend_right_tape(tm);
+  }
+  else
+  {
+    if ((size_t)(-(tm->head_pos + 1)) / 64 >= tm->left_tape_size)
+      extend_left_tape(tm);
+  }
+
   bool read_value = read(tm);
 
+  if (tm->state < 'A' || tm->state > 'Z')
+    return 2;
+
   Instruction instr = tm->trans_table[read_value][tm->state - 'A'];
+
   write(tm, instr.write);
+  read_value = read(tm);
+
   move(tm, instr.move);
 
   tm->state = instr.next_state;
+
+  return 1;
 }
 
 void dump_tm(TuringMachine *tm)

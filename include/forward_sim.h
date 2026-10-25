@@ -4,7 +4,7 @@
 #include "tm.h"
 
 TuringMachine *tm_new(Instruction **trans_table);
-void tm_step(TuringMachine *tm);
+int tm_step(TuringMachine *tm);
 void dump_tm(TuringMachine *tm);
 void save_tm(TuringMachine *tm);
 

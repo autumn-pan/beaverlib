@@ -24,7 +24,6 @@ typedef struct
   size_t left_tape_size;
   size_t right_tape_size;
 
-
   int64_t head_pos;
   bool head_dir; // Whether or not the head is on the right half-tape
 

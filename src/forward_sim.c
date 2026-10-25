@@ -141,8 +141,6 @@ int tm_step(TuringMachine *tm)
   Instruction instr = tm->trans_table[read_value][tm->state - 'A'];
 
   write(tm, instr.write);
-  read_value = read(tm);
-
   move(tm, instr.move);
 
   tm->state = instr.next_state;

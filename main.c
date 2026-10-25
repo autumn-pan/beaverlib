@@ -15,21 +15,15 @@ int64_t get_current_time_ms(void) {
 }
 
 int main(void) {
-  Instruction **instructions = (parse_tm("1RB1LC_1RC1RB_1RD0LE_1LA1LD_---0LA_1RA1RA"));
+  Instruction **instructions = (parse_tm("1RB1RA_0LC1LE_1LD1LC_1LA0LB_1LF1RE_---0RA"));
   TuringMachine *tm = tm_new(instructions);
 
 
   int64_t c1 = get_current_time_ms();
 
-  for(int i = 0; i < 100000000; i++)
+  for(int i = 0; i < 1000000000; i++)
   {
-    if(tm_step(tm) == 0)
-    {
-      printf("index: %i", i);
-
-      break;
-    }
-
+    tm_step(tm);
   } 
 
   int64_t c2 = get_current_time_ms();

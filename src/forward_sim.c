@@ -172,3 +172,4 @@ void save_tm(TuringMachine *tm)
   printf("| %llu", tm->head_dir);
   printf("| %c", tm->state);
 }
+

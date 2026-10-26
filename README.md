@@ -1,0 +1,5 @@
+# Excalibur
+
+Excalibur is a Turing machine framework with multiple functions, relating to the research of 6-state 2-symbol Turing machines. Its forward simulator is capable of computing approximately 250,000,000 steps per second, but this may vary significantly. The goal of this project is not to create the fastest simulator, however. As this is a work-in-progress, the functionality of this project is rather limited. Eventually, the goal is for Excalibur to specilize in backward reasoning, and to expand on the current mathematical framework of it. One particularly complex Turing machine is Antihydra, which is elusive to all current variants of backward reasoning, but has been and will be a center of attention for this project.
+
+At the current moment, Excalibur is capable of only forward simulation of 6-state, 2-symbol Turing machines. 

@@ -1,0 +1,3 @@
+/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/excalibur.dir
+/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/edit_cache.dir
+/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/rebuild_cache.dir

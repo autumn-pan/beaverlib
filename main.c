@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdint.h>
+#include <string.h>
 
 int64_t get_current_time_ms(void) {
     struct timespec ts;
@@ -15,19 +16,19 @@ int64_t get_current_time_ms(void) {
 }
 
 int main(void) {
-  Instruction **instructions = (parse_tm("1RB1RA_0LC1LE_1LD1LC_1LA0LB_1LF1RE_---0RA"));
+
+  char src[50];
+
+  printf("Enter a 6-state, 2-symbol Turing Machine: ");
+  scanf("%s", &src); 
+
+  Instruction **instructions = (parse_tm(src));
   TuringMachine *tm = tm_new(instructions);
-
-
-  int64_t c1 = get_current_time_ms();
 
   for(int i = 0; i < 1000000; i++)
   {
     tm_step(tm);
   } 
 
-  int64_t c2 = get_current_time_ms();
-
-  printf("diff: %llu", c2-c1);
-  save_tm(tm);
+  dump_tm(tm);
 }

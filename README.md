@@ -9,3 +9,15 @@ In the sense of Excalibur, a Turing machine consists of a state, a signed index,
 
 ## Future Work
 In the short-term future, the goal is to create a basic backward reasoning simulator. It will likely be more complicated than forward simulation. Beyond that, more advanced frameworks which build on basic BR would come into question. There is no precedent at the current moment for implementing these frameworks into code. As far as the author is aware, previous attempts to implement them have failed. There is question as to whether or not these are even feasible to commit to code.
+
+## Usage Guide
+1. Run the compiled binary
+2. When prompted, input a valid 6-state, 2-symbol Turing Machine
+
+For example, paste any of the following Turing Machines:
+```
+1RB1RA_0LC1LE_1LD1LC_1LA0LB_1LF1RE_---0RA
+1RB0RC_0RC1RC_0LD0RA_1LE0LF_0LA1LC_---1LA
+1RB0RE_1LC1RA_1LD0LC_1LA0LA_1RA1RF_0RA---
+1RB0LE_1LC0RD_0RA1LD_0LC1RA_1LF1LA_---1LA
+```

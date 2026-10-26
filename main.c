@@ -21,7 +21,7 @@ int main(void) {
 
   int64_t c1 = get_current_time_ms();
 
-  for(int i = 0; i < 1000000000; i++)
+  for(int i = 0; i < 1000000; i++)
   {
     tm_step(tm);
   } 
@@ -29,5 +29,5 @@ int main(void) {
   int64_t c2 = get_current_time_ms();
 
   printf("diff: %llu", c2-c1);
-  //save_tm(tm);
+  save_tm(tm);
 }

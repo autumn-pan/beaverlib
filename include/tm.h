@@ -5,13 +5,13 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define HALF_TAPE_SIZE 1
+#define HALF_TAPE_SIZE 256
 
 typedef struct
 {
   bool write;
   bool move;
-  char next_state;
+  uint8_t next_state;
 } Instruction;
 
 typedef struct 

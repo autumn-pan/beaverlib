@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#include "tape.h"
+
 // TODO: split this into a segregated list for efficiency
 typedef struct {
     // What state does the predecessor come from?
@@ -24,14 +26,6 @@ typedef struct {
   // Number of predecessors; length of each array
   size_t num_pred;
 } InverseEntry;
-
-typedef struct 
-{
-  uint32_t *tape;
-  size_t num_tape;
-
-  size_t head_pos;
-} Tape;
 
 typedef struct halt_config
 {

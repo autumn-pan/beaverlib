@@ -58,57 +58,6 @@ InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
   return entry;
 }
 
-// Create a blank tape
-Tape *blank_tape_new()
-{
-  Tape *tape = malloc(sizeof(Tape));
-  if(!tape)
-    return NULL;
-
-  tape->tape = calloc(1, sizeof(uint32_t));
-  if(!tape->tape)
-    return NULL;
-
-  tape->num_tape = 1;
-  tape->head_pos = 16;
-}
-
-// Clone the data from one tape to another
-Tape *tape_copy(const Tape *original)
-{
-  Tape *new = blank_tape_new();
-  if(!new)
-    return NULL;
-
-  new->head_pos = original->head_pos;
-  new->num_tape = original->num_tape;
-
-  // The tape is an array of integers, so we will need to iterate through that to copy data
-  new->tape = realloc(new->tape, new->num_tape*sizeof(uint32_t));
-  for(int i = 0; i < new->num_tape; i++)
-  {
-    new->tape[i] = original->tape[i];
-  }
-
-  return new;
-}
-
-void tape_write(Tape *tape, size_t pos, bool value)
-{
-  if(pos < 0 || pos > tape->num_tape*32 - 1)
-    return;
-
-  size_t fi = pos/32;
-  size_t si = pos%32;
-  uint32_t tape_seg = tape->tape[fi];
-
-  // Write the value
-  if(value)
-    tape_seg |= 1 << si;
-  else
-    tape_seg &= ~(1 << si);
-}
-
 HaltConfig *halt_config_new(uint8_t state, size_t pos, Tape *tape)
 {
   HaltConfig *config = malloc(sizeof(HaltConfig));

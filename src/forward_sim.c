@@ -22,7 +22,7 @@ TuringMachine *tm_new(Instruction **trans_table)
   tm->head_dir = 1;
   tm->head_pos = 0;
 
-  tm->state = 'A';
+  tm->state = 0;
 
   tm->trans_table = trans_table;
 
@@ -135,10 +135,10 @@ int tm_step(TuringMachine *tm)
 
   bool read_value = read(tm);
 
-  if (tm->state < 'A' || tm->state > 'Z')
+  if (tm->state < 0 || tm->state > 25)
     return 2;
 
-  Instruction instr = tm->trans_table[read_value][tm->state - 'A'];
+  Instruction instr = tm->trans_table[read_value][tm->state];
 
   write(tm, instr.write);
   move(tm, instr.move);

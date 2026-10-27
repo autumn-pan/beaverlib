@@ -21,8 +21,11 @@ Instruction **parse_tm(const char *line)
       ptr++;
       instructions[j][i].move = (*ptr == 'R');
       ptr++;
-      instructions[j][i].next_state = *ptr;
+      instructions[j][i].next_state = *ptr - 'A';
       ptr++;
+
+      instructions[j][i].req_symbol = j;
+      instructions[j][i].req_state = i;
     }
   }
 

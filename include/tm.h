@@ -12,6 +12,9 @@ typedef struct
   bool write;
   bool move;
   uint8_t next_state;
+
+  bool req_symbol;
+  uint8_t req_state;
 } Instruction;
 
 typedef struct 

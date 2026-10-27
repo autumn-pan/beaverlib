@@ -1,47 +1,52 @@
-#ifndef BACKWARD_H
-#define BACKWARD_H
+#ifndef BR_H
+#define BR_H
 
-#include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
-typedef struct halting_config
-{
-  struct halting_config **children;
-  size_t num_children;
+// TODO: split this into a segregated list for efficiency
+typedef struct {
+    // What state does the predecessor come from?
+  uint8_t *state;
 
-  uint64_t *right_tape;
-  uint64_t *left_tape;
+  // What direction does the predecessor need to be relative to the successor?
+  bool *direction;
 
-  size_t num_right_segments;
-  size_t num_left_segments;
+  // What symbol does the predecessor demand?
+  // This is equivalent to the "write" parameter
+  bool *req_symbol;
 
-  uint8_t state;
-  int64_t head_pos;
+  // What symbol does the predecessor write?
+  // This is equivalent to the symbolic index on the transition table
+  bool *new_symbol;
 
-  int64_t known_min;
-  int64_t known_max;
-} HaltingConfiguration;
-
-typedef struct 
-{
-  uint8_t state;
-  uint8_t new_state;
-  bool read;
-  bool write;
-} InverseInstruction;
-
-typedef struct 
-{
-  // Predecessors that write 0
-  InverseInstruction *pred0;
-  // Predecessors that write 1
-  InverseInstruction *pred1;
-
-  // Metadata for purpose of iteration
-  size_t num_pred0;
-  size_t num_pred1;
+  // Number of predecessors; length of each array
+  size_t num_pred;
 } InverseEntry;
 
+typedef struct 
+{
+  uint32_t *tape;
+  size_t num_tape;
+
+  size_t head_pos;
+} Tape;
+
+typedef struct halt_config
+{
+  struct halt_config **children;
+  size_t num_children;
+  uint8_t state;
+
+  Tape *tape;
+} HaltConfig;
+
+typedef struct
+{
+  HaltConfig *root;
+  
+  InverseEntry *inverse_table[6];
+} DeciderBR;
 
 #endif

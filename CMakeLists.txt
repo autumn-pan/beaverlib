@@ -4,7 +4,7 @@ project(excalibur C)
 
 add_executable(excalibur
   src/parser.c
-  src/forward_sim.c
+  src/deciders/forward_sim.c
 
   main.c
 )

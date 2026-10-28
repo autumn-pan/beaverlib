@@ -19,4 +19,6 @@ typedef struct
 
 } Tape;
 
+Tape *tape_new();
+
 #endif

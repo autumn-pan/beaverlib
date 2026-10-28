@@ -36,7 +36,7 @@ void dump_instructions(Instruction **instructions) {
   for (int i = 0; i < 2; i++) {
     for (int j = 0; j < 6; j++) {
       Instruction inst = instructions[i][j];
-      printf("Instruction %d,%d: write=%d, move=%d, next_state=%c\n", i, j, inst.write, inst.move, inst.next_state);
+      printf("Instruction %d,%d: write=%d, move=%d, next_state=%c\n", i, j, inst.write, inst.move, inst.next_state + 'A');
     }
   }
 }

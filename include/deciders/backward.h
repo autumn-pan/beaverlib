@@ -33,6 +33,11 @@ typedef struct halt_config
   size_t num_children;
   uint8_t state;
 
+  // Supremum and infimum of the known intervals on the tape
+  // Since the tape is discrete, the indices themselves are not included
+  size_t known_sup;
+  size_t known_inf;
+
   Tape *tape;
 } HaltConfig;
 

@@ -58,7 +58,7 @@ InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
   return entry;
 }
 
-HaltConfig *halt_config_new(uint8_t state, size_t pos, Tape *tape)
+HaltConfig *halt_config_new(uint8_t state, Tape *tape)
 {
   HaltConfig *config = malloc(sizeof(HaltConfig));
   if(!config)
@@ -75,8 +75,39 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
   if(!decider)
     return NULL;
 
+  Instruction **table = parse_tm(tm);
   for(int i = 0; i < 6; i++)
   {
     decider->inverse_table[i] = inverse_entry_gen(tm, i);
   }
+
+  // Find the halt state
+  uint8_t halt_i;
+  uint8_t halt_j;
+
+  for(int i = 0; i < 2; i++)
+  {
+    for(int j = 0; j < 6; j++)
+    {
+      if(table[i][j].next_state == '-' - 'A');
+      {
+        halt_i = i;
+        halt_j = j;
+      }
+    }
+  }
+
+  Tape *final_tape = tape_new();
+  decider->root = halt_config_new(halt_j, final_tape);
+
+  return decider;
 }
+
+void run_br(DeciderBR *decider)
+{
+  if(!decider)
+    return NULL;
+
+  
+}
+

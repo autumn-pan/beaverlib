@@ -5,6 +5,13 @@
 #include "tape.h"
 #include "tm.h"
 
+uint64_t iabs(int64_t n)
+{
+  int64_t mask = n >> 63;
+
+  return (n ^ mask) - mask;
+}
+
 Tape *tape_new()
 {
   Tape *tape = malloc(sizeof(Tape));
@@ -71,8 +78,8 @@ void write(Tape *tape, bool value)
 {
   if (tape->head_pos >= 0)
   {
-    size_t word = (size_t)tape->head_pos / 64;
-    size_t bit = (size_t)tape->head_pos % 64;
+    size_t word = (size_t)iabs(tape->head_pos) / 64;
+    size_t bit = (size_t)iabs(tape->head_pos) % 64;
 
     if (value)
       tape->right_tape[word] |= (1ULL << bit);
@@ -81,8 +88,31 @@ void write(Tape *tape, bool value)
     return;
   }
 
-  size_t word = (size_t)(-(tape->head_pos + 1)) / 64;
-  size_t bit = (size_t)(-(tape->head_pos + 1)) % 64;
+  size_t word = (size_t)(-(iabs(tape->head_pos) + 1)) / 64;
+  size_t bit = (size_t)(-(iabs(tape->head_pos) + 1)) % 64;
+
+  if (value)
+    tape->left_tape[word] |= (1ULL << bit);
+  else
+    tape->left_tape[word] &= ~(1ULL << bit);
+}
+
+void write_pos(Tape *tape, bool value, int64_t pos)
+{
+  if (pos >= 0)
+  {
+    size_t word = (size_t)pos / 64;
+    size_t bit = (size_t)pos % 64;
+
+    if (value)
+      tape->right_tape[word] |= (1ULL << bit);
+    else
+      tape->right_tape[word] &= ~(1ULL << bit);
+    return;
+  }
+
+  size_t word = (size_t)(-(pos + 1)) / 64;
+  size_t bit = (size_t)(-(pos + 1)) % 64;
 
   if (value)
     tape->left_tape[word] |= (1ULL << bit);

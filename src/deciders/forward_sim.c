@@ -4,6 +4,13 @@
 
 #include "tm.h"
 
+uint64_t iabs(int64_t n)
+{
+  int64_t mask = n >> 63;
+
+  return (n ^ mask) - mask;
+}
+
 TuringMachine *tm_new(Instruction **trans_table)
 {
   TuringMachine *tm = malloc(sizeof(TuringMachine));
@@ -95,42 +102,48 @@ void write(TuringMachine *tm, bool value)
 
 void move(TuringMachine *tm, bool dir)
 {
-  if (dir)
-    tm->head_pos++;
-  else
-    tm->head_pos--;
-
-  if (tm->head_pos >= 0)
+  if(tm->head_dir)
   {
-    tm->head_dir = 1;
-    if ((size_t)tm->head_pos / 64 >= tm->right_tape_size)
-      extend_right_tape(tm);
+    // Right tape case
+    if(dir)
+    {
+      tm->head_pos++;
+      if((uint64_t)(tm->head_pos/64) > tm->right_tape_size)
+        extend_right_tape(tm);
+    }
+    else
+    {
+      if(tm->head_pos == 0)
+        tm->head_dir = 0;
+      else
+        tm->head_pos--;
+    }
   }
   else
   {
-    tm->head_dir = 0;
-    if ((size_t)(-(tm->head_pos + 1)) / 64 >= tm->left_tape_size)
-      extend_left_tape(tm);
+    // Left tape case
+    if(!dir)
+    {
+      tm->head_pos++;
+      if((uint64_t)(tm->head_pos/64) > tm->left_tape_size)
+        extend_left_tape(tm);
+    }
+    else
+    {
+      if(tm->head_pos == 0)
+        tm->head_dir = 1;
+      else
+        tm->head_pos--;
+    }
   }
 }
 
 int tm_step(TuringMachine *tm)
 {
-  if (!tm || tm->state == '-')
+  if (!tm || tm->state == '-' - 'A')
   {
-    printf("Halted!");
+    printf("Halted!\n");
     return 0;
-  }
-
-  if (tm->head_pos >= 0)
-  {
-    if ((size_t)tm->head_pos / 64 >= tm->right_tape_size)
-      extend_right_tape(tm);
-  }
-  else
-  {
-    if ((size_t)(-(tm->head_pos + 1)) / 64 >= tm->left_tape_size)
-      extend_left_tape(tm);
   }
 
   bool read_value = read(tm);
@@ -152,7 +165,7 @@ void dump_tm(TuringMachine *tm)
 {
   printf("Head dir: %i\n", tm->head_dir);
   printf("Head pos: %llu\n", tm->head_pos);
-  printf("State: %c\n", tm->state);
+  printf("State: %c\n", tm->state + 'A');
 }
 
 void save_tm(TuringMachine *tm)

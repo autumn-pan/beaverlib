@@ -2,7 +2,7 @@
 
 #include "parser.h"
 #include "tm.h"
-#include "include/deciders/forward_sim.h"
+#include "deciders/forward_sim.h"
 
 #include <stdio.h>
 #include <time.h>
@@ -16,7 +16,6 @@ int64_t get_current_time_ms(void) {
 }
 
 int main(void) {
-
   char src[50];
 
   printf("Enter a 6-state, 2-symbol Turing Machine: ");
@@ -24,19 +23,17 @@ int main(void) {
 
   Instruction **instructions = (parse_tm(src));
   TuringMachine *tm = tm_new(instructions);
+  dump_instructions(instructions);
 
   size_t t1 = get_current_time_ms();
   for(int i = 0; i < 1000000000; i++)
   {
-    if(tm_step(tm) == 0)
-    {
-      printf("Runtime: %llu\n", i);
-      break;
-    }
+    tm_step(tm);
   } 
   
   size_t t2 = get_current_time_ms();
-  printf("Ops per second: %llu\n", 1000000000000*(t2-t1));
+  printf("Time: %llu\n", t2-t1);
+  printf("Ops per second: %llu\n", 1000000000000/(t2-t1));
 
   dump_tm(tm);
 }

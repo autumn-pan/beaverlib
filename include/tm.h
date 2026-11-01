@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define HALF_TAPE_SIZE 256
+#define HALF_TAPE_SIZE 1024
 
 typedef struct
 {

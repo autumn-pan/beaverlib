@@ -7,5 +7,6 @@ TuringMachine *tm_new(Instruction **trans_table);
 int tm_step(TuringMachine *tm);
 void dump_tm(TuringMachine *tm);
 void save_tm(TuringMachine *tm);
+void dump_tape(TuringMachine *tm);
 
 #endif

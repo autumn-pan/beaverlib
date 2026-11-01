@@ -4,6 +4,7 @@
 
 #include "tm.h"
 
+
 uint64_t iabs(int64_t n)
 {
   int64_t mask = n >> 63;
@@ -65,21 +66,21 @@ void extend_right_tape(TuringMachine *tm)
 
 bool read(TuringMachine *tm)
 {
-  if (tm->head_pos >= 0)
+  if (tm->head_dir > 0)
   {
     size_t word = (size_t)tm->head_pos / 64;
     size_t bit = (size_t)tm->head_pos % 64;
-    return (tm->right_tape[word] >> bit) & 1U;
+    return (tm->right_tape[word] >> bit) & 1ULL;
   }
 
-  size_t word = (size_t)(-(tm->head_pos + 1)) / 64;
-  size_t bit = (size_t)(-(tm->head_pos + 1)) % 64;
-  return (tm->left_tape[word] >> bit) & 1U;
+  size_t word = (size_t)((tm->head_pos)) / 64;
+  size_t bit = (size_t)((tm->head_pos)) % 64;
+  return (tm->left_tape[word] >> bit) & 1ULL;
 }
 
 void write(TuringMachine *tm, bool value)
 {
-  if (tm->head_pos >= 0)
+  if (tm->head_dir == 1)
   {
     size_t word = (size_t)tm->head_pos / 64;
     size_t bit = (size_t)tm->head_pos % 64;
@@ -88,11 +89,12 @@ void write(TuringMachine *tm, bool value)
       tm->right_tape[word] |= (1ULL << bit);
     else
       tm->right_tape[word] &= ~(1ULL << bit);
+      
     return;
   }
 
-  size_t word = (size_t)(-(tm->head_pos + 1)) / 64;
-  size_t bit = (size_t)(-(tm->head_pos + 1)) % 64;
+  size_t word = (size_t)((tm->head_pos)) / 64;
+  size_t bit = (size_t)((tm->head_pos)) % 64;
 
   if (value)
     tm->left_tape[word] |= (1ULL << bit);
@@ -138,34 +140,13 @@ void move(TuringMachine *tm, bool dir)
   }
 }
 
-int tm_step(TuringMachine *tm)
-{
-  if (!tm || tm->state == '-' - 'A')
-  {
-    printf("Halted!\n");
-    return 0;
-  }
-
-  bool read_value = read(tm);
-
-  if (tm->state < 0 || tm->state > 25)
-    return 2;
-
-  Instruction instr = tm->trans_table[read_value][tm->state];
-
-  write(tm, instr.write);
-  move(tm, instr.move);
-
-  tm->state = instr.next_state;
-
-  return 1;
-}
-
 void dump_tm(TuringMachine *tm)
 {
   printf("Head dir: %i\n", tm->head_dir);
   printf("Head pos: %llu\n", tm->head_pos);
   printf("State: %c\n", tm->state + 'A');
+  printf("Reading: %i\n\n", read(tm));
+
 }
 
 void save_tm(TuringMachine *tm)
@@ -186,3 +167,42 @@ void save_tm(TuringMachine *tm)
   printf("| %c", tm->state);
 }
 
+void dump_tape(TuringMachine *tm)
+{
+  for(int i = 0; i < tm->left_tape_size; i++)
+  {
+    if(tm->left_tape[i] != 0)
+      printf("%llu ", tm->left_tape[i]);
+  }
+  printf("\n\n");
+  for(int i = 0; i < tm->right_tape_size; i++)
+  {
+    if(tm->right_tape[i] != 0)
+      printf("%llu ", tm->right_tape[i]);
+  }
+}
+
+int tm_step(TuringMachine *tm)
+{
+  if (!tm || tm->state == '-' - 'A')
+  {
+    printf("Halted!\n");
+    return 0;
+  }
+
+  bool read_value = read(tm);
+
+  if (tm->state < 0 || tm->state > 25)
+    return 2;
+
+  Instruction instr = tm->trans_table[read_value][tm->state];
+
+
+
+  write(tm, instr.write);
+  move(tm, instr.move);
+
+  tm->state = instr.next_state;
+
+  return 1;
+}

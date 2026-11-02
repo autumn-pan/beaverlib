@@ -27,3 +27,8 @@ The machine will be simulated for 1,000,000,000 steps, or until it halts. The to
 The standard BR decider is currently under construction. Starting from the halting configuration, it will work backward to construct a set of configurations that when run in a forward simulator, will halt. Then, it will prove that the initial configuration, which is an all-0 tape with state A, does not exist within the set. Therefore, it would prove that the initial condition cannot reach the halting state, and therefore that the machine is nonhalting. This is very similar to doing forward simulation, but we must figure out how to do it in reverse. 
 
 In our first order of business, we establish a backward transition table. We must, for each state, describe what kinds of transitions lead to it. 
+
+## Notes
+I made this because I have this idea for a new kind of decider. I've played around with this for a few months, but building it in code has always een an extraordinary challenge. If it can be done, then it would be a monumental achievement and would contribute a lot to mathematics.
+
+<img width="1122" height="444" alt="image" src="https://github.com/user-attachments/assets/26a2daa1-1cb5-4a23-b45f-f4cf5b8a0fb3" />

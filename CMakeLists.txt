@@ -5,7 +5,7 @@ project(excalibur C)
 add_executable(excalibur
   src/parser.c
   src/deciders/forward_sim.c
-
+  src/deciders/backward.c
   main.c
 )
 

@@ -3,6 +3,8 @@
 #include "parser.h"
 #include "tm.h"
 #include "deciders/forward_sim.h"
+#include "config.h"
+#include "deciders/backward.h"
 
 #include <stdio.h>
 #include <time.h>
@@ -15,6 +17,8 @@ int64_t get_current_time_ms(void) {
     return (int64_t)(ts.tv_sec) * 1000 + (int64_t)(ts.tv_nsec) / 1000000;
 }
 
+
+#ifndef BR_ENABLED
 int main(void) {
   char src[50];
 
@@ -37,3 +41,18 @@ int main(void) {
 
   dump_tm(tm);
 }
+#else
+int main(void) {
+  char src[50];
+
+  printf("Enter a 6-state, 2-symbol Turing Machine: ");
+  scanf("%s", &src); 
+
+  Instruction **instructions = (parse_tm(src));
+  TuringMachine *tm = tm_new(instructions);
+  
+  DeciderBR *decider = br_decider_gen(tm);
+  dump_br_table(decider);
+}
+#endif
+

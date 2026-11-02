@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "tape.h"
+#include "tm.h"
 
 // TODO: split this into a segregated list for efficiency
 typedef struct {
@@ -45,7 +46,10 @@ typedef struct
 {
   HaltConfig *root;
   
-  InverseEntry *inverse_table[6];
+  InverseEntry **inverse_table;
 } DeciderBR;
+
+DeciderBR *br_decider_gen(TuringMachine *tm);
+void dump_br_table(DeciderBR *decider);
 
 #endif

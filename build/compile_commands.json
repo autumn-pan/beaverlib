@@ -13,6 +13,12 @@
 },
 {
   "directory": "/home/autumn/Documents/mprojects/orangutan/build",
+  "command": "/usr/bin/gcc -I/home/autumn/Documents/mprojects/orangutan/include -g -O3 -march=native -flto -o CMakeFiles/excalibur.dir/src/deciders/backward.c.o -c /home/autumn/Documents/mprojects/orangutan/src/deciders/backward.c",
+  "file": "/home/autumn/Documents/mprojects/orangutan/src/deciders/backward.c",
+  "output": "/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/excalibur.dir/src/deciders/backward.c.o"
+},
+{
+  "directory": "/home/autumn/Documents/mprojects/orangutan/build",
   "command": "/usr/bin/gcc -I/home/autumn/Documents/mprojects/orangutan/include -g -O3 -march=native -flto -o CMakeFiles/excalibur.dir/main.c.o -c /home/autumn/Documents/mprojects/orangutan/main.c",
   "file": "/home/autumn/Documents/mprojects/orangutan/main.c",
   "output": "/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/excalibur.dir/main.c.o"

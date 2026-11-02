@@ -1,7 +1,10 @@
-#include "backward.h"
+#include "deciders/backward.h"
 #include "tm.h"
 #include "parser.h"
 
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 // Not optimal but proportionally irrelevant
 InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
@@ -11,10 +14,10 @@ InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
     return NULL;
 
   // Transition table for the tm
-  Instruction **table = parse_tm(tm);
+  Instruction **table = tm->trans_table;
 
   // List of every instruction that is a predecessor to the state
-  Instruction *candidate_list;
+  Instruction *candidate_list = NULL;
   entry->num_pred = 0;
 
   // Generate candidate_list
@@ -23,13 +26,18 @@ InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
     for(int j = 0; j < 6; j++)
     {
       Instruction candidate = table[i][j];
+      
 
       if(candidate.next_state == state)
       {
         entry->num_pred++;
         candidate_list = realloc(candidate_list, entry->num_pred*sizeof(Instruction));
         if(!candidate_list)
+        {
+          printf("Error");
+          fflush(stdout);
           return NULL;
+        }
 
         candidate_list[entry->num_pred - 1] = candidate;
       }
@@ -64,7 +72,7 @@ HaltConfig *halt_config_new(uint8_t state, Tape *tape)
   if(!config)
     return NULL;
 
-  config->num_children = NULL;
+  config->num_children = 0;
   config->state = state;
   config->tape = tape;
 }
@@ -75,12 +83,14 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
   if(!decider)
     return NULL;
 
-  Instruction **table = parse_tm(tm);
+  Instruction **table = tm->trans_table;
+  decider->inverse_table = calloc(6, sizeof(InverseEntry));
   for(int i = 0; i < 6; i++)
   {
     decider->inverse_table[i] = inverse_entry_gen(tm, i);
   }
 
+  /*
   // Find the halt state
   uint8_t halt_i;
   uint8_t halt_j;
@@ -96,18 +106,31 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
       }
     }
   }
-
-  Tape *final_tape = tape_new();
-  decider->root = halt_config_new(halt_j, final_tape);
+  */
 
   return decider;
 }
 
+void dump_br_table(DeciderBR *decider)
+{
+  printf("Dumping BR Table: \n\n");
+  for(int i = 0; i < 6; i++)
+  {
+    InverseEntry *entry = decider->inverse_table[i];
+
+    for(int j = 0; j < entry->num_pred; j++)
+    {
+      printf("%i ", entry->req_symbol);
+      printf("%i%i%c  ", entry->direction[j], entry->new_symbol[j], entry->state[j] + 'A');
+      fflush(stdout);
+    }
+
+    printf("\n");
+  }
+}
+
 void run_br(DeciderBR *decider)
 {
-  if(!decider)
-    return NULL;
 
-  
 }
 

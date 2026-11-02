@@ -67,6 +67,15 @@ build CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o: C_COMPILER__excalib
   OBJECT_FILE_DIR = CMakeFiles/excalibur.dir/src/deciders
   TARGET_SUPPORT_DIR = CMakeFiles/excalibur.dir
 
+build CMakeFiles/excalibur.dir/src/deciders/backward.c.o: C_COMPILER__excalibur_unscanned_Debug /home/autumn/Documents/mprojects/orangutan/src/deciders/backward.c || cmake_object_order_depends_target_excalibur
+  CONFIG = Debug
+  DEP_FILE = CMakeFiles/excalibur.dir/src/deciders/backward.c.o.d
+  FLAGS = -g -O3 -march=native -flto
+  INCLUDES = -I/home/autumn/Documents/mprojects/orangutan/include
+  OBJECT_DIR = CMakeFiles/excalibur.dir
+  OBJECT_FILE_DIR = CMakeFiles/excalibur.dir/src/deciders
+  TARGET_SUPPORT_DIR = CMakeFiles/excalibur.dir
+
 build CMakeFiles/excalibur.dir/main.c.o: C_COMPILER__excalibur_unscanned_Debug /home/autumn/Documents/mprojects/orangutan/main.c || cmake_object_order_depends_target_excalibur
   CONFIG = Debug
   DEP_FILE = CMakeFiles/excalibur.dir/main.c.o.d
@@ -84,7 +93,7 @@ build CMakeFiles/excalibur.dir/main.c.o: C_COMPILER__excalibur_unscanned_Debug /
 #############################################
 # Link the executable excalibur
 
-build excalibur: C_EXECUTABLE_LINKER__excalibur_Debug CMakeFiles/excalibur.dir/src/parser.c.o CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o CMakeFiles/excalibur.dir/main.c.o
+build excalibur: C_EXECUTABLE_LINKER__excalibur_Debug CMakeFiles/excalibur.dir/src/parser.c.o CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o CMakeFiles/excalibur.dir/src/deciders/backward.c.o CMakeFiles/excalibur.dir/main.c.o
   CONFIG = Debug
   DEP_FILE = CMakeFiles/excalibur.dir/link.d
   FLAGS = -g

@@ -53,6 +53,20 @@ int main(void) {
   
   DeciderBR *decider = br_decider_gen(tm);
   dump_br_table(decider);
+
+  printf("\n\nForward Analysis:\n");
+
+  size_t t1 = get_current_time_ms();
+  for(int i = 0; i < 1000000000; i++)
+  {
+    tm_step(tm);
+  } 
+  
+  size_t t2 = get_current_time_ms();
+  printf("Time: %llu\n", t2-t1);
+  printf("Ops per second: %llu\n", 1000000000000/(t2-t1));
+
+  dump_tm(tm);
 }
 #endif
 

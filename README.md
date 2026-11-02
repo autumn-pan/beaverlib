@@ -22,3 +22,8 @@ For example, paste any of the following Turing Machines:
 ```
 
 The machine will be simulated for 1,000,000,000 steps, or until it halts. The total runtime is printed after the simulation is complete.
+
+## Backward Reasoning
+The standard BR decider is currently under construction. Starting from the halting configuration, it will work backward to construct a set of configurations that when run in a forward simulator, will halt. Then, it will prove that the initial configuration, which is an all-0 tape with state A, does not exist within the set. Therefore, it would prove that the initial condition cannot reach the halting state, and therefore that the machine is nonhalting. This is very similar to doing forward simulation, but we must figure out how to do it in reverse. 
+
+In our first order of business, we establish a backward transition table. We must, for each state, describe what kinds of transitions lead to it. 

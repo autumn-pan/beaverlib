@@ -108,7 +108,7 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
   }
   
   printf("Halt i-index: %i\n", halt_i);
-  printf("Half j-index: %i\n", halt_j);
+  printf("Halt j-index: %i\n", halt_j);
 
   return decider;
 }

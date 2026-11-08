@@ -135,3 +135,47 @@ void move(Tape *tape, bool dir)
     }
   }
 }
+
+Tape *clone_tape(const Tape *ref) 
+{
+  // Make the new tape
+  Tape *new = tape_new();
+
+  // Copy basic metadata
+  new->head_dir = ref->head_dir;
+  new->head_pos = ref->head_pos;
+
+  // Copy the tape contents
+
+  new->left_tape_size = ref->left_tape_size;
+  new->right_tape_size = ref->right_tape_size;
+
+  new->left_tape = calloc(new->left_tape_size, sizeof(uint64_t));
+  new->right_tape = calloc(new->right_tape_size, sizeof(uint64_t));
+
+  // We need to be careful on how we copy the raw tape values
+  // because they are pointers
+  for(int i = 0; i < new->left_tape_size; i++)
+    new->left_tape[i] = ref->left_tape[i];
+
+  for(int i = 0; i < new->left_tape_size; i++)
+    new->right_tape[i] = ref->right_tape[i];
+
+  // Return the new tape
+  return new;
+}
+
+void dump_tape(const Tape *tape)
+{
+  for(int i = 0; i < tape->left_tape_size; i++)
+  {
+    if(tape->left_tape[i] != 0)
+      printf("%llu ", tape->left_tape[i]);
+  }
+  printf("\n\n");
+  for(int i = 0; i < tape->right_tape_size; i++)
+  {
+    if(tape->right_tape[i] != 0)
+      printf("%llu ", tape->right_tape[i]);
+  }
+}

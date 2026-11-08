@@ -20,5 +20,5 @@ typedef struct
 } Tape;
 
 Tape *tape_new();
-
+void write(Tape *tape, bool value);
 #endif

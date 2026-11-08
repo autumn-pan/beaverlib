@@ -148,16 +148,11 @@ void dump_br_table(DeciderBR *decider)
 
 void br_step(DeciderBR *decider, HaltConfig *config)
 {
-  printf("state: %i", config->state);
-  fflush(stdout);
   // Fetch the relevant inverse table entry
   InverseEntry *entry = decider->inverse_table[config->state];
 
   for(int i = 0; i < entry->num_pred; i++)
   {
-    printf("flag");
-    fflush(stdout);
-    
     int8_t dir = (entry->direction[i] << 1) - 1;
     uint8_t req_state = entry->state[i];
     bool req_symbol = entry->req_symbol;

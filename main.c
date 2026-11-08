@@ -53,6 +53,8 @@ int main(void) {
   
   DeciderBR *decider = br_decider_gen(tm);
   br_step(decider, decider->root);
+
+  printf("Req State: %c\n", decider->root->children[0]->state + 'A');
   dump_br_table(decider);
 
   printf("\n\nForward Analysis:\n");

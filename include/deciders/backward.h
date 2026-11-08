@@ -20,6 +20,8 @@ typedef struct {
   // This is equivalent to the "write" parameter
   bool *req_symbol;
 
+  uint8_t *req_state;
+
   // What symbol does the predecessor write?
   // This is equivalent to the symbolic index on the transition table
   bool *new_symbol;

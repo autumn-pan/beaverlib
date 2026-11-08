@@ -68,5 +68,5 @@ int main(void) {
 
   dump_tm(tm);
 }
-#endif
 
+#endif

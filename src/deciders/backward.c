@@ -90,7 +90,7 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
     decider->inverse_table[i] = inverse_entry_gen(tm, i);
   }
 
-  /*
+  
   // Find the halt state
   uint8_t halt_i;
   uint8_t halt_j;
@@ -106,7 +106,9 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
       }
     }
   }
-  */
+  
+  printf("Halt i-index: %i\n", halt_i);
+  printf("Half j-index: %i\n", halt_j);
 
   return decider;
 }
@@ -118,11 +120,11 @@ void dump_br_table(DeciderBR *decider)
   {
     InverseEntry *entry = decider->inverse_table[i];
 
+    printf("%c: ", i+'A');
     for(int j = 0; j < entry->num_pred; j++)
     {
-      printf("%i ", entry->req_symbol);
+      printf("%i ", entry->req_symbol[j]);
       printf("%i%i%c  ", entry->direction[j], entry->new_symbol[j], entry->state[j] + 'A');
-      fflush(stdout);
     }
 
     printf("\n");

@@ -27,3 +27,7 @@ The machine will be simulated for 1,000,000,000 steps, or until it halts. The to
 The standard BR decider is currently under construction. Starting from the halting configuration, it will work backward to construct a set of configurations that when run in a forward simulator, will halt. Then, it will prove that the initial configuration, which is an all-0 tape with state A, does not exist within the set. Therefore, it would prove that the initial condition cannot reach the halting state, and therefore that the machine is nonhalting. This is very similar to doing forward simulation, but we must figure out how to do it in reverse. 
 
 In our first order of business, we establish a backward transition table. We must, for each state, describe what kinds of transitions lead to it. 
+
+In the development of the elementary BR decider, there were some issues which were encountered. As of writing this, approximately seven hours have been dedicated to its development. There needed to be overhauls in the tape system, including changes in how cells could be written and read on tape segments. The primary BR decider relies on a recursive function that propagates down the branches of the tree. It only produces a child if and only if, after running the child configuration forwards for one step, it results in a halting configuration that is equivalent to the parent.
+
+

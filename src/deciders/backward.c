@@ -128,7 +128,6 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
   return decider;
 }
 
-
 void dump_br_table(DeciderBR *decider)
 {
   printf("Dumping BR Table: \n\n");
@@ -193,4 +192,62 @@ void br_step(DeciderBR *decider, HaltConfig *config)
     
     append_config(config, child);
   }
+}
+
+
+bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
+{
+  // Fetch the relevant inverse table entry
+  InverseEntry *entry = decider->inverse_table[config->state];
+
+  for(int i = 0; i < entry->num_pred; i++)
+  {
+    int8_t dir = (!entry->direction[i] << 1) - 1;
+    uint8_t req_state = entry->state[i];
+    bool req_symbol = entry->req_symbol;
+
+    bool new_dir = config->tape->head_dir;
+    bool new_pos = config->tape->head_pos;
+
+    if(((int64_t)config->tape->head_pos + dir) < 0)
+    {
+      new_dir = !config->tape->head_dir;
+      new_pos = 0;
+    }
+    else
+      new_pos = new_pos + dir;
+
+    printf("New dir: %i, New pos: %i\n", new_dir, new_pos);
+    printf("Read: %i\n", read_to_pos(config->tape, new_dir, new_pos));
+    printf("Write value: %i\n", entry->req_symbol[i]);
+
+    if(entry->req_symbol[i] != read_to_pos(config->tape, new_dir, new_pos))
+      if((new_dir && new_pos < config->known_sup) || (!new_dir && new_pos < config->known_inf))
+        continue;
+
+    HaltConfig *child;
+
+    Tape *new_tape = clone_tape(config->tape);
+    new_tape->head_dir = new_dir;
+    new_tape->head_pos = new_pos;
+    write2(new_tape, entry->req_symbol[i]);
+    child = halt_config_new(entry->state[i], new_tape);
+
+    if(new_dir && new_pos > config->known_sup)
+      child->known_sup++;
+    else if(!new_dir && new_pos > config->known_inf)
+      child->known_inf++;
+    
+    append_config(config, child);
+  }
+
+  if(config->num_children == 0)
+    return true;
+  
+  for(int i = 0; i < config->num_children; i++)
+  {
+    br_step_recursive(decider, config->children[i]);
+  }
+
+  return true;
 }

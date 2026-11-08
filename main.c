@@ -52,6 +52,7 @@ int main(void) {
   TuringMachine *tm = tm_new(instructions);
   
   DeciderBR *decider = br_decider_gen(tm);
+  br_step(decider, decider->root);
   dump_br_table(decider);
 
   printf("\n\nForward Analysis:\n");

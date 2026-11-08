@@ -54,5 +54,6 @@ typedef struct
 
 DeciderBR *br_decider_gen(TuringMachine *tm);
 void dump_br_table(DeciderBR *decider);
+void br_step(DeciderBR *decider, HaltConfig *config);
 
 #endif

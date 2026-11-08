@@ -76,6 +76,16 @@ HaltConfig *halt_config_new(uint8_t state, Tape *tape)
   config->num_children = 0;
   config->state = state;
   config->tape = tape;
+
+  return config;
+}
+
+void append_config(HaltConfig *parent, HaltConfig *child)
+{
+  parent->num_children++;
+  parent->children = realloc(parent->children, parent->num_children);
+
+  parent->children[parent->num_children - 1] = child;
 }
 
 DeciderBR *br_decider_gen(TuringMachine *tm)
@@ -106,7 +116,7 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
       }
     }
   }
-  
+
   Tape *initial_tape = tape_new();
   write2(initial_tape, halt_i);
 
@@ -138,18 +148,22 @@ void dump_br_table(DeciderBR *decider)
 
 void br_step(DeciderBR *decider, HaltConfig *config)
 {
+  printf("state: %i", config->state);
+  fflush(stdout);
   // Fetch the relevant inverse table entry
   InverseEntry *entry = decider->inverse_table[config->state];
 
   for(int i = 0; i < entry->num_pred; i++)
   {
+    printf("flag");
+    fflush(stdout);
+    
     int8_t dir = (entry->direction[i] << 1) - 1;
     uint8_t req_state = entry->state[i];
     bool req_symbol = entry->req_symbol;
 
     bool new_dir = config->tape->head_dir;
     bool new_pos = config->tape->head_pos;
-
 
     if((int64_t)config->tape->head_pos + dir < 0)
     {
@@ -172,6 +186,6 @@ void br_step(DeciderBR *decider, HaltConfig *config)
     write2(new_tape, entry->req_symbol[i]);
     child = halt_config_new(entry->state[i], new_tape);
     
-    
+    append_config(config, child);
   }
 }

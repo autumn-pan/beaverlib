@@ -119,14 +119,15 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
 
   Tape *initial_tape = tape_new();
   write2(initial_tape, halt_i);
-
   decider->root = halt_config_new(halt_j, initial_tape);
-  
+  decider->root->known_inf = 0;
+  decider->root->known_sup = 1;
   printf("Halt i-index: %i\n", halt_i);
   printf("Halt j-index: %i\n", halt_j);
 
   return decider;
 }
+
 
 void dump_br_table(DeciderBR *decider)
 {
@@ -153,7 +154,7 @@ void br_step(DeciderBR *decider, HaltConfig *config)
 
   for(int i = 0; i < entry->num_pred; i++)
   {
-    int8_t dir = (entry->direction[i] << 1) - 1;
+    int8_t dir = (!entry->direction[i] << 1) - 1;
     uint8_t req_state = entry->state[i];
     bool req_symbol = entry->req_symbol;
 
@@ -170,8 +171,12 @@ void br_step(DeciderBR *decider, HaltConfig *config)
       new_pos = new_pos + dir;
     }
 
-    if(entry->new_symbol[i] != read_to_pos(config->tape, new_dir, new_pos))
-      continue;
+    printf("New dir: %i, New pos: %i\n", new_dir, new_pos);
+    printf("Read: %i\n", read_to_pos(config->tape, new_dir, new_pos));
+    printf("Write value: %i\n", entry->req_symbol[i]);
+    if(entry->req_symbol[i] != read_to_pos(config->tape, new_dir, new_pos))
+      if((new_dir && new_pos < config->known_sup) || (!new_dir && new_pos < config->known_inf))
+        continue;
 
     HaltConfig *child;
 
@@ -180,6 +185,11 @@ void br_step(DeciderBR *decider, HaltConfig *config)
     new_tape->head_pos = new_pos;
     write2(new_tape, entry->req_symbol[i]);
     child = halt_config_new(entry->state[i], new_tape);
+
+    if(new_dir && new_pos > config->known_sup)
+      child->known_sup++;
+    else if(!new_dir && new_pos > config->known_inf)
+      child->known_inf++;
     
     append_config(config, child);
   }

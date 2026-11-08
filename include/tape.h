@@ -20,5 +20,12 @@ typedef struct
 } Tape;
 
 Tape *tape_new();
-void write(Tape *tape, bool value);
+void write2(Tape *tape, bool value);
+void dump_tape2(const Tape *tape);
+bool read2(Tape *tape);
+bool read_to_pos(Tape *tape, bool head_dir, size_t head_pos);
+Tape *clone_tape(const Tape *ref);
+
+
+
 #endif

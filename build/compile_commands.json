@@ -19,6 +19,12 @@
 },
 {
   "directory": "/home/autumn/Documents/mprojects/orangutan/build",
+  "command": "/usr/bin/gcc -I/home/autumn/Documents/mprojects/orangutan/include -g -O3 -march=native -flto -o CMakeFiles/excalibur.dir/src/tape.c.o -c /home/autumn/Documents/mprojects/orangutan/src/tape.c",
+  "file": "/home/autumn/Documents/mprojects/orangutan/src/tape.c",
+  "output": "/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/excalibur.dir/src/tape.c.o"
+},
+{
+  "directory": "/home/autumn/Documents/mprojects/orangutan/build",
   "command": "/usr/bin/gcc -I/home/autumn/Documents/mprojects/orangutan/include -g -O3 -march=native -flto -o CMakeFiles/excalibur.dir/main.c.o -c /home/autumn/Documents/mprojects/orangutan/main.c",
   "file": "/home/autumn/Documents/mprojects/orangutan/main.c",
   "output": "/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles/excalibur.dir/main.c.o"

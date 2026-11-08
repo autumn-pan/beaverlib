@@ -1,5 +1,6 @@
 #include "deciders/backward.h"
 #include "tm.h"
+#include "tape.h"
 #include "parser.h"
 
 #include <stdint.h>
@@ -107,7 +108,9 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
   }
   
   Tape *initial_tape = tape_new();
-  write(initial_tape, halt_i);
+  write2(initial_tape, halt_i);
+
+  decider->root = halt_config_new(halt_j, initial_tape);
   
   printf("Halt i-index: %i\n", halt_i);
   printf("Halt j-index: %i\n", halt_j);
@@ -130,5 +133,45 @@ void dump_br_table(DeciderBR *decider)
     }
 
     printf("\n");
+  }
+}
+
+void br_step(DeciderBR *decider, HaltConfig *config)
+{
+  // Fetch the relevant inverse table entry
+  InverseEntry *entry = decider->inverse_table[config->state];
+
+  for(int i = 0; i < entry->num_pred; i++)
+  {
+    int8_t dir = (entry->direction[i] << 1) - 1;
+    uint8_t req_state = entry->state[i];
+    bool req_symbol = entry->req_symbol;
+
+    bool new_dir = config->tape->head_dir;
+    bool new_pos = config->tape->head_pos;
+
+
+    if((int64_t)config->tape->head_pos + dir < 0)
+    {
+      new_dir = !config->tape->head_dir;
+      new_pos = 0;
+    }
+    else
+    {
+      new_pos = new_pos + dir;
+    }
+
+    if(entry->new_symbol[i] != read_to_pos(config->tape, new_dir, new_pos))
+      continue;
+
+    HaltConfig *child;
+
+    Tape *new_tape = clone_tape(config->tape);
+    new_tape->head_dir = new_dir;
+    new_tape->head_pos = new_pos;
+    write2(new_tape, entry->req_symbol[i]);
+    child = halt_config_new(entry->state[i], new_tape);
+    
+    
   }
 }

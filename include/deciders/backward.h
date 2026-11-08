@@ -10,7 +10,7 @@
 
 // TODO: split this into a segregated list for efficiency
 typedef struct {
-    // What state does the predecessor come from?
+  // What state does the predecessor come from?
   uint8_t *state;
 
   // What direction does the predecessor need to be relative to the successor?
@@ -20,6 +20,7 @@ typedef struct {
   // This is equivalent to the "write" parameter
   bool *req_symbol;
 
+  // This is probably obsolete
   uint8_t *req_state;
 
   // What symbol does the predecessor write?

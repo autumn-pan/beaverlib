@@ -5,7 +5,7 @@
 #include "tape.h"
 #include "tm.h"
 
-uint64_t iabs(int64_t n)
+uint64_t iabs2(int64_t n)
 {
   int64_t mask = n >> 63;
 
@@ -34,7 +34,7 @@ Tape *tape_new()
 }
 
 // append an additional uint64_t to a half-tape
-static void extend_half_tape(uint64_t **tape, size_t *tape_size)
+static void extend_half_tape2(uint64_t **tape, size_t *tape_size)
 {
   size_t new_size = *tape_size + 1;
   uint64_t *new_tape = realloc(*tape, new_size * sizeof(uint64_t));
@@ -49,18 +49,18 @@ static void extend_half_tape(uint64_t **tape, size_t *tape_size)
 }
 
 // append an additional uint64_t to the left half-tape
-void extend_left_tape(Tape *tape)
+void extend_left_tape2(Tape *tape)
 {
-  extend_half_tape(&tape->left_tape, &tape->left_tape_size);
+  extend_half_tape2(&tape->left_tape, &tape->left_tape_size);
 }
 
 // append an additional uint64_t to a right half-tape
-void extend_right_tape(Tape *tape)
+void extend_right_tape2(Tape *tape)
 {
-  extend_half_tape(&tape->right_tape, &tape->right_tape_size);
+  extend_half_tape2(&tape->right_tape, &tape->right_tape_size);
 }
 
-bool read(Tape *tape)
+bool read2(Tape *tape)
 {
   if (tape->head_dir > 0)
   {
@@ -74,7 +74,7 @@ bool read(Tape *tape)
   return (tape->left_tape[word] >> bit) & 1ULL;
 }
 
-void write(Tape *tape, bool value)
+void write2(Tape *tape, bool value)
 {
   if (tape->head_dir == 1)
   {
@@ -98,7 +98,46 @@ void write(Tape *tape, bool value)
     tape->left_tape[word] &= ~(1ULL << bit);
 }
 
-void move(Tape *tape, bool dir)
+
+bool read_to_pos(Tape *tape, bool head_dir, size_t head_pos)
+{
+  if (head_dir > 0)
+  {
+    size_t word = (size_t)head_pos / 64;
+    size_t bit = (size_t)head_pos % 64;
+    return (tape->right_tape[word] >> bit) & 1ULL;
+  }
+
+  size_t word = (size_t)((head_pos)) / 64;
+  size_t bit = (size_t)((head_pos)) % 64;
+  return (tape->left_tape[word] >> bit) & 1ULL;
+}
+
+void write_to_pos(Tape *tape, bool value, bool head_dir, size_t head_pos)
+{
+  if (head_dir == 1)
+  {
+    size_t word = (size_t)head_pos / 64;
+    size_t bit = (size_t)head_pos % 64;
+
+    if (value)
+      tape->right_tape[word] |= (1ULL << bit);
+    else
+      tape->right_tape[word] &= ~(1ULL << bit);
+      
+    return;
+  }
+
+  size_t word = (size_t)((head_pos)) / 64;
+  size_t bit = (size_t)((head_pos)) % 64;
+
+  if (value)
+    tape->left_tape[word] |= (1ULL << bit);
+  else
+    tape->left_tape[word] &= ~(1ULL << bit);
+}
+
+void move2(Tape *tape, bool dir)
 {
   if(tape->head_dir)
   {
@@ -107,7 +146,7 @@ void move(Tape *tape, bool dir)
     {
       tape->head_pos++;
       if((uint64_t)(tape->head_pos/64) > tape->right_tape_size)
-        extend_right_tape(tape);
+        extend_right_tape2(tape);
     }
     else
     {
@@ -124,7 +163,7 @@ void move(Tape *tape, bool dir)
     {
       tape->head_pos++;
       if((uint64_t)(tape->head_pos/64) > tape->left_tape_size)
-        extend_left_tape(tape);
+        extend_left_tape2(tape);
     }
     else
     {
@@ -165,7 +204,7 @@ Tape *clone_tape(const Tape *ref)
   return new;
 }
 
-void dump_tape(const Tape *tape)
+void dump_tape2(const Tape *tape)
 {
   for(int i = 0; i < tape->left_tape_size; i++)
   {
@@ -179,3 +218,4 @@ void dump_tape(const Tape *tape)
       printf("%llu ", tape->right_tape[i]);
   }
 }
+

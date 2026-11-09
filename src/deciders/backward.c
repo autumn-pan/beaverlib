@@ -194,7 +194,6 @@ void br_step(DeciderBR *decider, HaltConfig *config)
   }
 }
 
-
 bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 {
   // Fetch the relevant inverse table entry
@@ -202,20 +201,23 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 
   for(int i = 0; i < entry->num_pred; i++)
   {
-    int8_t dir = (!entry->direction[i] << 1) - 1;
-    uint8_t req_state = entry->state[i];
-    bool req_symbol = entry->req_symbol;
+    int8_t dir = (!entry->direction[i] * 2) - 1;
 
     bool new_dir = config->tape->head_dir;
-    bool new_pos = config->tape->head_pos;
+    int64_t new_pos = config->tape->head_pos;
 
     if(((int64_t)config->tape->head_pos + dir) < 0)
     {
+      printf("Value: %llu\n", (int64_t)config->tape->head_pos + dir);
       new_dir = !config->tape->head_dir;
       new_pos = 0;
     }
     else
       new_pos = new_pos + dir;
+
+    printf("Dir: %i", dir);
+    printf("Cycle index: %i\n", i);
+    printf("Old dir: %i, Old pos: %i\n", config->tape->head_dir, config->tape->head_pos);
 
     printf("New dir: %i, New pos: %i\n", new_dir, new_pos);
     printf("Read: %i\n", read_to_pos(config->tape, new_dir, new_pos));
@@ -230,6 +232,9 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     Tape *new_tape = clone_tape(config->tape);
     new_tape->head_dir = new_dir;
     new_tape->head_pos = new_pos;
+    printf("New cloned dir: %i\n", new_tape->head_dir);
+    printf("New cloned pos: %i\n\n\n", new_tape->head_pos);
+
     write2(new_tape, entry->req_symbol[i]);
     child = halt_config_new(entry->state[i], new_tape);
 
@@ -251,3 +256,4 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 
   return true;
 }
+

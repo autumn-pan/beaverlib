@@ -53,9 +53,9 @@ int main(void) {
   
   DeciderBR *decider = br_decider_gen(tm);
   if(!br_step_recursive(decider, decider->root))
-    printf("Turing machine failed to halt within 128 BR steps!");
+    printf("Turing machine failed to be decided within 128 BR steps!\n");
   else
-    printf("Turing machine halted!");
+    printf("Turing machine nonhalting!\n");
 
   printf("Req State: %c\n", decider->root->children[0]->state + 'A');
   dump_br_table(decider);

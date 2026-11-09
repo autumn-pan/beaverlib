@@ -1,17 +1,14 @@
 # ninja log v7
-1	46	1794096166247529180	CMakeFiles/excalibur.dir/src/parser.c.o	680bcf7d02763759
+1	36	1794192144215778896	CMakeFiles/excalibur.dir/src/parser.c.o	680bcf7d02763759
 2	60	1794171762814459712	CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o	bfa061959dc5fea
 2	35	1794188411667776296	CMakeFiles/excalibur.dir/main.c.o	d1a370d99a6f4b7
-43	254	1794188570077592832	excalibur	a0b06e5d7f8ad9c7
-4	60	1794161017831241773	build.ninja	705ac411aa16e15e
-4	60	1794161017830100933	/home/autumn/Documents/mprojects/orangutan/build/cmake_install.cmake	705ac411aa16e15e
-1	43	1794188570035598233	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
+42	242	1794192410291527628	excalibur	a0b06e5d7f8ad9c7
+4	60	1794192741467006035	build.ninja	705ac411aa16e15e
+4	60	1794192741465731317	/home/autumn/Documents/mprojects/orangutan/build/cmake_install.cmake	705ac411aa16e15e
+1	42	1794192410249590219	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
 1	48	1794188411667358651	CMakeFiles/excalibur.dir/src/tape.c.o	fc413b3073c37efb
-1	35	1794189397099261129	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
-35	242	1794189397133263513	excalibur	a0b06e5d7f8ad9c7
-2	48	1794190013338592149	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
-48	239	1794190013385069437	excalibur	a0b06e5d7f8ad9c7
-1	41	1794190112596349843	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
-41	263	1794190112636470128	excalibur	a0b06e5d7f8ad9c7
-1	52	1794190139846541062	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
-52	266	1794190139896543299	excalibur	a0b06e5d7f8ad9c7
+8	107	1794193201421851074	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
+107	437	1794193201520933817	excalibur	a0b06e5d7f8ad9c7
+1	32	1794193732465423891	CMakeFiles/excalibur.dir/src/parser.c.o	680bcf7d02763759
+1	43	1794193732466165564	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
+43	239	1794193732507423439	excalibur	a0b06e5d7f8ad9c7

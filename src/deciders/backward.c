@@ -27,8 +27,6 @@ InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
     for(int j = 0; j < 6; j++)
     {
       Instruction candidate = table[i][j];
-      
-
       if(candidate.next_state == state)
       {
         entry->num_pred++;
@@ -102,15 +100,18 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
   }
   
   // Find the halt state
-  uint8_t halt_i;
-  uint8_t halt_j;
+  uint8_t halt_i = UINT8_MAX;
+  uint8_t halt_j = UINT8_MAX;
 
   for(int i = 0; i < 2; i++)
   {
     for(int j = 0; j < 6; j++)
     {
-      if(table[i][j].next_state == '-' - 'A');
+      printf("Next State: %c\n", table[i][j].next_state + 'A');
+      
+      if(table[i][j].next_state == (uint8_t)('-' - 'A'))
       {
+        printf("hi");
         halt_i = i;
         halt_j = j;
       }
@@ -208,13 +209,14 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 
     if(((int64_t)config->tape->head_pos + dir) < 0)
     {
-      printf("Value: %llu\n", (int64_t)config->tape->head_pos + dir);
+      printf("Value: %lli\n", (int64_t)config->tape->head_pos + dir);
       new_dir = !config->tape->head_dir;
       new_pos = 0;
     }
     else
       new_pos = new_pos + dir;
 
+    /*
     printf("Dir: %i", dir);
     printf("Cycle index: %i\n", i);
     printf("Old dir: %i, Old pos: %i\n", config->tape->head_dir, config->tape->head_pos);
@@ -222,6 +224,7 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     printf("New dir: %i, New pos: %i\n", new_dir, new_pos);
     printf("Read: %i\n", read_to_pos(config->tape, new_dir, new_pos));
     printf("Write value: %i\n", entry->req_symbol[i]);
+    */
 
     if(entry->req_symbol[i] != read_to_pos(config->tape, new_dir, new_pos))
       if((new_dir && new_pos < config->known_sup) || (!new_dir && new_pos < config->known_inf))
@@ -232,8 +235,11 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     Tape *new_tape = clone_tape(config->tape);
     new_tape->head_dir = new_dir;
     new_tape->head_pos = new_pos;
+
+    /*
     printf("New cloned dir: %i\n", new_tape->head_dir);
     printf("New cloned pos: %i\n\n\n", new_tape->head_pos);
+    */
 
     write2(new_tape, entry->req_symbol[i]);
     child = halt_config_new(entry->state[i], new_tape);

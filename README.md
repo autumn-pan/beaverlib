@@ -29,3 +29,5 @@ The standard BR decider is currently under construction. Starting from the halti
 In our first order of business, we establish a backward transition table. We must, for each state, describe what kinds of transitions lead to it. 
 
 In the development of the elementary BR decider, there were some issues which were encountered. As of writing this, approximately seven hours have been dedicated to its development. There needed to be overhauls in the tape system, including changes in how cells could be written and read on tape segments. The primary BR decider relies on a recursive function that propagates down the branches of the tree. It only produces a child if and only if, after running the child configuration forwards for one step, it results in a halting configuration that is equivalent to the parent.
+
+1RA---_0RA0LA_1LB1RA_1RA1RA_1RA1RA_1RA1RA

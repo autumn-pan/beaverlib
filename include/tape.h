@@ -25,7 +25,8 @@ bool read2(Tape *tape);
 bool read_to_pos(Tape *tape, bool head_dir, size_t head_pos);
 void write_to_pos(Tape *tape, bool value, bool head_dir, size_t head_pos);
 Tape *clone_tape(const Tape *ref);
-
+void extend_left_tape2(Tape *tape);
+void extend_right_tape2(Tape *tape);
 
 
 #endif

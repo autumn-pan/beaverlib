@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+size_t counter = 0;
 // Not optimal but proportionally irrelevant
 InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
 {
@@ -88,6 +89,7 @@ void append_config(HaltConfig *parent, HaltConfig *child)
 
 DeciderBR *br_decider_gen(TuringMachine *tm)
 {
+  printf("BR Debug Content: \n");
   DeciderBR *decider = malloc(sizeof(DeciderBR));
   if(!decider)
     return NULL;
@@ -106,12 +108,10 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
   for(int i = 0; i < 2; i++)
   {
     for(int j = 0; j < 6; j++)
-    {
-      printf("Next State: %c\n", table[i][j].next_state + 'A');
-      
+    {      
       if(table[i][j].next_state == (uint8_t)('-' - 'A'))
       {
-        printf("hi");
+        printf("Halt state found!");
         halt_i = i;
         halt_j = j;
       }
@@ -125,6 +125,11 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
   decider->root->known_sup = 1;
   printf("Halt i-index: %i\n", halt_i);
   printf("Halt j-index: %i\n", halt_j);
+  if(halt_i == UINT8_MAX)
+  {
+    fprintf(stderr, "Fatal Error: Halting state not detected!");
+    exit(EXIT_FAILURE);
+  }
 
   return decider;
 }
@@ -197,6 +202,7 @@ void br_step(DeciderBR *decider, HaltConfig *config)
 
 bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 {
+  counter++;
   // Fetch the relevant inverse table entry
   InverseEntry *entry = decider->inverse_table[config->state];
 
@@ -209,7 +215,6 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 
     if(((int64_t)config->tape->head_pos + dir) < 0)
     {
-      printf("Value: %lli\n", (int64_t)config->tape->head_pos + dir);
       new_dir = !config->tape->head_dir;
       new_pos = 0;
     }
@@ -252,6 +257,9 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     append_config(config, child);
   }
 
+  if(counter >= 127)
+    return false;
+
   if(config->num_children == 0)
     return true;
   
@@ -259,7 +267,5 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
   {
     br_step_recursive(decider, config->children[i]);
   }
-
-  return true;
 }
 

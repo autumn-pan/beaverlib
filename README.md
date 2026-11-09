@@ -18,7 +18,7 @@ For example, paste any of the following Turing Machines:
 ```
 1RB1RA_0LC1LE_1LD1LC_1LA0LB_1LF1RE_---0RA
 1RB0RC_0RC1RC_0LD0RA_1LE0LF_0LA1LC_---1LA
-1RB0RE_1LC1RA_1LD0LC_1LA0LA_1RA1RF_0RA---
+1RB1LD_1RC0RB_1LA1RC_1RE0LA_1LF1LE_1LC---
 ```
 
 The machine will be simulated for 1,000,000,000 steps, or until it halts. The total runtime is printed after the simulation is complete.

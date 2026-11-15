@@ -6,6 +6,7 @@ add_executable(excalibur
   src/parser.c
   src/deciders/forward_sim.c
   src/deciders/backward.c
+  src/tape.c
   main.c
 )
 

@@ -10,7 +10,7 @@
 
 // TODO: split this into a segregated list for efficiency
 typedef struct {
-    // What state does the predecessor come from?
+  // What state does the predecessor come from?
   uint8_t *state;
 
   // What direction does the predecessor need to be relative to the successor?
@@ -19,6 +19,9 @@ typedef struct {
   // What symbol does the predecessor demand?
   // This is equivalent to the "write" parameter
   bool *req_symbol;
+
+  // This is probably obsolete
+  uint8_t *req_state;
 
   // What symbol does the predecessor write?
   // This is equivalent to the symbolic index on the transition table
@@ -51,5 +54,7 @@ typedef struct
 
 DeciderBR *br_decider_gen(TuringMachine *tm);
 void dump_br_table(DeciderBR *decider);
+void br_step(DeciderBR *decider, HaltConfig *config);
+bool br_step_recursive(DeciderBR *decider, HaltConfig *config);
 
 #endif

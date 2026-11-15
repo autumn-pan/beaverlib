@@ -52,6 +52,12 @@ int main(void) {
   TuringMachine *tm = tm_new(instructions);
   
   DeciderBR *decider = br_decider_gen(tm);
+  if(!br_step_recursive(decider, decider->root))
+    printf("Turing machine failed to be decided within 128 BR steps!\n");
+  else
+    printf("Turing machine nonhalting!\n");
+
+  printf("Req State: %c\n", decider->root->children[0]->state + 'A');
   dump_br_table(decider);
 
   printf("\n\nForward Analysis:\n");
@@ -68,5 +74,5 @@ int main(void) {
 
   dump_tm(tm);
 }
-#endif
 
+#endif

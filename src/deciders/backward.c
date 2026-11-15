@@ -1,11 +1,13 @@
 #include "deciders/backward.h"
 #include "tm.h"
+#include "tape.h"
 #include "parser.h"
 
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+size_t counter = 0;
 // Not optimal but proportionally irrelevant
 InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
 {
@@ -26,8 +28,6 @@ InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
     for(int j = 0; j < 6; j++)
     {
       Instruction candidate = table[i][j];
-      
-
       if(candidate.next_state == state)
       {
         entry->num_pred++;
@@ -75,10 +75,21 @@ HaltConfig *halt_config_new(uint8_t state, Tape *tape)
   config->num_children = 0;
   config->state = state;
   config->tape = tape;
+
+  return config;
+}
+
+void append_config(HaltConfig *parent, HaltConfig *child)
+{
+  parent->num_children++;
+  parent->children = realloc(parent->children, parent->num_children);
+
+  parent->children[parent->num_children - 1] = child;
 }
 
 DeciderBR *br_decider_gen(TuringMachine *tm)
 {
+  printf("BR Debug Content: \n");
   DeciderBR *decider = malloc(sizeof(DeciderBR));
   if(!decider)
     return NULL;
@@ -89,24 +100,36 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
   {
     decider->inverse_table[i] = inverse_entry_gen(tm, i);
   }
-
-  /*
+  
   // Find the halt state
-  uint8_t halt_i;
-  uint8_t halt_j;
+  uint8_t halt_i = UINT8_MAX;
+  uint8_t halt_j = UINT8_MAX;
 
   for(int i = 0; i < 2; i++)
   {
     for(int j = 0; j < 6; j++)
-    {
-      if(table[i][j].next_state == '-' - 'A');
+    {      
+      if(table[i][j].next_state == (uint8_t)('-' - 'A'))
       {
+        printf("Halt state found!");
         halt_i = i;
         halt_j = j;
       }
     }
   }
-  */
+
+  Tape *initial_tape = tape_new();
+  write2(initial_tape, halt_i);
+  decider->root = halt_config_new(halt_j, initial_tape);
+  decider->root->known_inf = 0;
+  decider->root->known_sup = 1;
+  printf("Halt i-index: %i\n", halt_i);
+  printf("Halt j-index: %i\n", halt_j);
+  if(halt_i == UINT8_MAX)
+  {
+    fprintf(stderr, "Fatal Error: Halting state not detected!");
+    exit(EXIT_FAILURE);
+  }
 
   return decider;
 }
@@ -118,19 +141,131 @@ void dump_br_table(DeciderBR *decider)
   {
     InverseEntry *entry = decider->inverse_table[i];
 
+    printf("%c: ", i+'A');
     for(int j = 0; j < entry->num_pred; j++)
     {
-      printf("%i ", entry->req_symbol);
+      printf("%i ", entry->req_symbol[j]);
       printf("%i%i%c  ", entry->direction[j], entry->new_symbol[j], entry->state[j] + 'A');
-      fflush(stdout);
     }
 
     printf("\n");
   }
 }
 
-void run_br(DeciderBR *decider)
+void br_step(DeciderBR *decider, HaltConfig *config)
 {
+  // Fetch the relevant inverse table entry
+  InverseEntry *entry = decider->inverse_table[config->state];
 
+  for(int i = 0; i < entry->num_pred; i++)
+  {
+    int8_t dir = (!entry->direction[i] << 1) - 1;
+    uint8_t req_state = entry->state[i];
+    bool req_symbol = entry->req_symbol;
+
+    bool new_dir = config->tape->head_dir;
+    bool new_pos = config->tape->head_pos;
+
+    if((int64_t)config->tape->head_pos + dir < 0)
+    {
+      new_dir = !config->tape->head_dir;
+      new_pos = 0;
+    }
+    else
+    {
+      new_pos = new_pos + dir;
+    }
+
+    printf("New dir: %i, New pos: %i\n", new_dir, new_pos);
+    printf("Read: %i\n", read_to_pos(config->tape, new_dir, new_pos));
+    printf("Write value: %i\n", entry->req_symbol[i]);
+    if(entry->req_symbol[i] != read_to_pos(config->tape, new_dir, new_pos))
+      if((new_dir && new_pos < config->known_sup) || (!new_dir && new_pos < config->known_inf))
+        continue;
+
+    HaltConfig *child;
+
+    Tape *new_tape = clone_tape(config->tape);
+    new_tape->head_dir = new_dir;
+    new_tape->head_pos = new_pos;
+    write2(new_tape, entry->req_symbol[i]);
+    child = halt_config_new(entry->state[i], new_tape);
+
+    if(new_dir && new_pos > config->known_sup)
+      child->known_sup++;
+    else if(!new_dir && new_pos > config->known_inf)
+      child->known_inf++;
+    
+    append_config(config, child);
+  }
+}
+
+bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
+{
+  counter++;
+  // Fetch the relevant inverse table entry
+  InverseEntry *entry = decider->inverse_table[config->state];
+
+  for(int i = 0; i < entry->num_pred; i++)
+  {
+    int8_t dir = (!entry->direction[i] * 2) - 1;
+
+    bool new_dir = config->tape->head_dir;
+    int64_t new_pos = config->tape->head_pos;
+
+    if(((int64_t)config->tape->head_pos + dir) < 0)
+    {
+      new_dir = !config->tape->head_dir;
+      new_pos = 0;
+    }
+    else
+      new_pos = new_pos + dir;
+
+    /*
+    printf("Dir: %i", dir);
+    printf("Cycle index: %i\n", i);
+    printf("Old dir: %i, Old pos: %i\n", config->tape->head_dir, config->tape->head_pos);
+
+    printf("New dir: %i, New pos: %i\n", new_dir, new_pos);
+    printf("Read: %i\n", read_to_pos(config->tape, new_dir, new_pos));
+    printf("Write value: %i\n", entry->req_symbol[i]);
+    */
+
+    if(entry->req_symbol[i] != read_to_pos(config->tape, new_dir, new_pos))
+      if((new_dir && new_pos < config->known_sup) || (!new_dir && new_pos < config->known_inf))
+        continue;
+
+    HaltConfig *child;
+
+    Tape *new_tape = clone_tape(config->tape);
+    new_tape->head_dir = new_dir;
+    new_tape->head_pos = new_pos;
+
+    /*
+    printf("New cloned dir: %i\n", new_tape->head_dir);
+    printf("New cloned pos: %i\n\n\n", new_tape->head_pos);
+    */
+
+    write2(new_tape, entry->req_symbol[i]);
+    child = halt_config_new(entry->state[i], new_tape);
+
+    if(new_dir && new_pos > config->known_sup)
+      child->known_sup++;
+    else if(!new_dir && new_pos > config->known_inf)
+      child->known_inf++;
+    
+    append_config(config, child);
+  }
+
+  if(counter >= 127)
+    return false;
+
+  if(config->num_children == 0)
+    return true;
+  
+  for(int i = 0; i < config->num_children; i++)
+  {
+    br_step_recursive(decider, config->children[i]);
+  }
 }
 

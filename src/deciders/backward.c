@@ -268,4 +268,3 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     br_step_recursive(decider, config->children[i]);
   }
 }
-

@@ -28,7 +28,7 @@ The standard BR decider is currently under construction. Starting from the halti
 
 In our first order of business, we establish a backward transition table. We must, for each state, describe what kinds of transitions lead to it. 
 
-In the development of the elementary BR decider, there were some issues which were encountered. As of writing this, approximately seven hours have been dedicated to its development. There needed to be overhauls in the tape system, including changes in how cells could be written and read on tape segments. The primary BR decider relies on a recursive function that propagates down the branches of the tree. It only produces a child if and only if, after running the child configuration forwards for one step, it results in a halting configuration that is equivalent to the parent.
+## Notes
+I made this because I have this idea for a new kind of decider. I've played around with this for a few months, but building it in code has always een an extraordinary challenge. If it can be done, then it would be a monumental achievement and would contribute a lot to mathematics.
 
-The BR decider right now is experimental and still under development. None of the three provided machines are meant to halt. The results from the BR decider should not be trusted at the current state.
-
+<img width="1122" height="444" alt="image" src="https://github.com/user-attachments/assets/26a2daa1-1cb5-4a23-b45f-f4cf5b8a0fb3" />

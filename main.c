@@ -5,6 +5,7 @@
 #include "deciders/forward_sim.h"
 #include "config.h"
 #include "deciders/backward.h"
+#include "deciders/fsim.h"
 
 #include <stdio.h>
 #include <time.h>
@@ -63,11 +64,7 @@ int main(void) {
   printf("\n\nForward Analysis:\n");
 
   size_t t1 = get_current_time_ms();
-  for(int i = 0; i < 1000000000; i++)
-  {
-    tm_step(tm);
-  } 
-  
+  run_fsim(instructions);
   size_t t2 = get_current_time_ms();
   printf("Time: %llu\n", t2-t1);
   printf("Ops per second: %llu\n", 1000000000000/(t2-t1));

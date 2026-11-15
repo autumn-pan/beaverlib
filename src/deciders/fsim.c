@@ -4,39 +4,51 @@
 
 #include "deciders/fsim.h"
 #include "tm.h"
-#include "parser.h"
 
 void run_fsim(Instruction **instructions)
 {
   uint64_t *tape = calloc(FSIM_TAPE_LEN, sizeof(uint64_t));
 
   uint64_t *fi = tape + (FSIM_TAPE_LEN >> 1);
-  uint8_t si = 0; // cycles from 0 to 31
+  uint64_t si = 1ULL << 63; // secondary bitmask
   uint8_t state = 0;
 
-  for(int i = 0; i < 10; i++)
+  for(int i = 0; i < 1000000000; i++)
   {
-    bool read = *fi & (1ULL << si);
+
+    bool read = (*fi & si) != 0;
 
     Instruction instr = instructions[read][state];
+
+    // Write the necessary value
+    if(instr.write)
+      *fi |= si;
+    else
+      *fi &= ~si;
+
+    // Move the machine head
     if(instr.move)
     {
-      si++;
-      if(si == 32)
+      si >>= 1;
+      if(si == 0)
       {
-        si = 0;
+        si = 1ULL << 63;
         fi++;
       }
     }
     else
     {
+      si <<= 1;
       if(si == 0)
       {
-        si == 31;
+        si = 1ULL;
         fi--;
       }
-      else
-        si--;
     }
+
+    state = instr.next_state;
   }
+
+  printf("hi");
 }
+

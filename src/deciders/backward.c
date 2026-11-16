@@ -212,7 +212,6 @@ void br_step(DeciderBR *decider, HaltConfig *config)
 bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 {
   counter++;
-
   if(!config)
   {
     printf("Fatal Error: Config not defined!");
@@ -225,6 +224,8 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 
   for(int i = 0; i < entry->num_pred; i++)
   {
+    printf("Counter: %i", counter);
+    fflush(stdout);
     int8_t dir = (!entry->direction[i] * 2) - 1;
 
     bool new_dir = config->tape->head_dir;
@@ -234,6 +235,7 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     {
       new_dir = !config->tape->head_dir;
       new_pos = 0;
+
     }
     else
       new_pos = new_pos + dir;
@@ -281,7 +283,6 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     append_config(config, child);
   }
 
-
   if(!config)
   {
     printf("Fatal Error: Config not defined!");
@@ -289,9 +290,11 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     return false;
   }
 
-
-  if(counter >= 10000000)
+  if(counter >= 40000)
+  {
+    printf("Exiting early to avoid stack overflow!\n");
     return false;
+  }
 
   if(config->num_children == 0)
     return true;
@@ -304,3 +307,5 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 
   return true;
 }
+
+// 1RA---_0RA0LA_1LA1RE_1RD1RD_1RD1RD_1RD1RD

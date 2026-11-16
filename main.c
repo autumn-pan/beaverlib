@@ -71,7 +71,7 @@ int main(void) {
   
   DeciderBR *decider = br_decider_gen(tm);
   if(!br_step_recursive(decider, decider->root))
-    printf("Turing machine failed to be decided within 128 BR steps!\n");
+    printf("Turing machine failed to be decided within 40000 BR steps!\n");
   else
     printf("Turing machine nonhalting!\n");
 

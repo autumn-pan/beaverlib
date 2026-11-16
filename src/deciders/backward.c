@@ -70,7 +70,11 @@ HaltConfig *halt_config_new(uint8_t state, Tape *tape)
 {
   HaltConfig *config = malloc(sizeof(HaltConfig));
   if(!config)
+  {
+    printf("Fatal Error: Failed to allocate memory!");
+    fflush(stdout);
     return NULL;
+  }
 
   config->num_children = 0;
   config->state = state;
@@ -84,6 +88,11 @@ void append_config(HaltConfig *parent, HaltConfig *child)
   parent->num_children++;
   parent->children = realloc(parent->children, parent->num_children);
 
+  if(!parent->children)
+  {
+    printf("Fatal Error: Failed to allocate memory!");
+    fflush(stdout);
+  }
   parent->children[parent->num_children - 1] = child;
 }
 
@@ -203,6 +212,14 @@ void br_step(DeciderBR *decider, HaltConfig *config)
 bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 {
   counter++;
+
+  if(!config)
+  {
+    printf("Fatal Error: Config not defined!");
+    fflush(stdout);
+    return false;
+  }
+
   // Fetch the relevant inverse table entry
   InverseEntry *entry = decider->inverse_table[config->state];
 
@@ -249,6 +266,13 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     write2(new_tape, entry->req_symbol[i]);
     child = halt_config_new(entry->state[i], new_tape);
 
+    if(!child)
+    {
+      printf("Error: Failed to form child!");
+      fflush(stdout);
+      return false;
+    }
+
     if(new_dir && new_pos > config->known_sup)
       child->known_sup++;
     else if(!new_dir && new_pos > config->known_inf)
@@ -257,14 +281,26 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     append_config(config, child);
   }
 
-  if(counter >= 127)
+
+  if(!config)
+  {
+    printf("Fatal Error: Config not defined!");
+    fflush(stdout);
+    return false;
+  }
+
+
+  if(counter >= 10000000)
     return false;
 
   if(config->num_children == 0)
     return true;
-  
+
   for(int i = 0; i < config->num_children; i++)
   {
-    br_step_recursive(decider, config->children[i]);
+    if(!br_step_recursive(decider, config->children[i]))
+      return false;
   }
+
+  return true;
 }

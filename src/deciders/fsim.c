@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <time.h>
 
 #include "deciders/fsim.h"
 #include "tm.h"
@@ -15,7 +16,6 @@ void run_fsim(Instruction **instructions)
 
   for(int i = 0; i < 1000000000; i++)
   {
-
     bool read = (*fi & si) != 0;
 
     Instruction instr = instructions[read][state];
@@ -47,8 +47,12 @@ void run_fsim(Instruction **instructions)
     }
 
     state = instr.next_state;
+    if(state > 5)
+    {
+      printf("Halted in %llu!\n", i + 1);
+      break;
+    }
   }
 
-  printf("hi");
+  printf("Optimized Forward Sim Complete!");
 }
-

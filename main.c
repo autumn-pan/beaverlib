@@ -18,7 +18,6 @@ int64_t get_current_time_ms(void) {
     return (int64_t)(ts.tv_sec) * 1000 + (int64_t)(ts.tv_nsec) / 1000000;
 }
 
-
 #ifndef BR_ENABLED
 int main(void) {
   char src[50];
@@ -43,11 +42,29 @@ int main(void) {
   dump_tm(tm);
 }
 #else
+
+
 int main(void) {
   char src[50];
+  char *antihydra = "1RB1RA_0LC1LE_1LD1LC_1LA0LB_1LF1RE_---0RA";
+  char *bb5 = "1RB1LC_1RC1RB_1RD0LE_1LA1LD_---0LA_1RA1RA";
 
-  printf("Enter a 6-state, 2-symbol Turing Machine: ");
-  scanf("%s", &src); 
+  uint8_t choice;
+  printf("Select a Turing Machine\n");
+  printf("1. Antihydra\n2. BB(5) Champion\n3. Custom\n");
+  scanf("%i", &choice);
+
+  printf("Choice: %i", choice);
+  fflush(stdout);
+  if(choice == 1)
+    strcpy(src, antihydra);
+  if(choice == 2)
+    strcpy(src, bb5);
+  if(choice == 3)
+  {
+    printf("Enter a 6-state, 2-symbol Turing Machine: ");
+    scanf("%s", &src); 
+  }
 
   Instruction **instructions = (parse_tm(src));
   TuringMachine *tm = tm_new(instructions);

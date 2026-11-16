@@ -1,6 +1,6 @@
 # Excalibur
 
-Excalibur is a Turing machine framework with multiple functions, relating to the research of 6-state 2-symbol Turing machines. Its forward simulator is capable of computing approximately 150,000,000 steps per second, but this may vary significantly. The goal of this project is not to create the fastest simulator, however. As this is a work-in-progress, the functionality of this project is rather limited. Eventually, the goal is for Excalibur to specilize in backward reasoning, and to expand on the current mathematical framework of it. One particularly complex Turing machine is Antihydra, which is elusive to all current variants of backward reasoning, but has been and will be a center of attention for this project.
+Excalibur is a Turing machine framework with multiple functions, relating to the research of 6-state 2-symbol Turing machines. Its forward simulator is capable of computing approximately 165,000,000 steps per second, but this may vary significantly. The goal of this project is not to create the fastest simulator, however. As this is a work-in-progress, the functionality of this project is rather limited. Eventually, the goal is for Excalibur to specilize in backward reasoning, and to expand on the current mathematical framework of it. One particularly complex Turing machine is Antihydra, which is elusive to all current variants of backward reasoning, but has been and will be a center of attention for this project.
 
 At the current moment, Excalibur is capable of only forward simulation of 6-state, 2-symbol Turing machines. While it is not designed to be competitively fast, efforts to optimize it are still significant; a lot of time was spent making the forward simulator faster. There has also been work done on the Backward Reasoning decider, but it is not fully reliable or operational yet.
 
@@ -26,9 +26,6 @@ The machine will be simulated for 1,000,000,000 steps, or until it halts. The to
 ## Backward Reasoning
 The standard BR decider is currently under construction. Starting from the halting configuration, it will work backward to construct a set of configurations that when run in a forward simulator, will halt. Then, it will prove that the initial configuration, which is an all-0 tape with state A, does not exist within the set. Therefore, it would prove that the initial condition cannot reach the halting state, and therefore that the machine is nonhalting. This is very similar to doing forward simulation, but we must figure out how to do it in reverse. 
 
-In our first order of business, we establish a backward transition table. We must, for each state, describe what kinds of transitions lead to it. 
-
-## Notes
-I made this because I have this idea for a new kind of decider. I've played around with this for a few months, but building it in code has always een an extraordinary challenge. If it can be done, then it would be a monumental achievement and would contribute a lot to mathematics.
+The current BR decider is more stable than in previous versions, but is still highly experimental and is not ready for large-scale use. There has not been sufficient testing with this decider.
 
 <img width="1122" height="444" alt="image" src="https://github.com/user-attachments/assets/26a2daa1-1cb5-4a23-b45f-f4cf5b8a0fb3" />

@@ -1,0 +1,3 @@
+IBR is an experimental way to solve the halting problems of Turing machines based on Backward Reasoning. At its current stage, IBR has never been implemented before, and has only been used manually. This is the first attempt to implement it programmatically. 
+
+The primary principle of IBR is to create the inverse analogue of macro rules and use them to define an automaton which represents the backward configuration tree. The so-called inverse macro rules act as the edges. This allows us to describe more advanced structures such as loops.

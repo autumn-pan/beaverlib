@@ -81,7 +81,7 @@ int main(void) {
   printf("\n\nForward Analysis:\n");
 
   size_t t1 = get_current_time_ms();
-  run_fsim(instructions);
+  run_telemetric_fsim(instructions);
   size_t t2 = get_current_time_ms();
   printf("Time: %llu\n", t2-t1);
   printf("Ops per second: %llu\n", 1000000000000/(t2-t1));

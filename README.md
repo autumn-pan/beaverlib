@@ -4,6 +4,8 @@ Excalibur is a Turing machine framework with multiple functions, relating to the
 
 At the current moment, Excalibur is capable of only forward simulation of 6-state, 2-symbol Turing machines. While it is not designed to be competitively fast, efforts to optimize it are still significant; a lot of time was spent making the forward simulator faster. There has also been work done on the Backward Reasoning decider, but it is not fully reliable or operational yet.
 
+The goal of this project is to be the first ever implementation of a new type of Backward reasoning and analyze its effectiveness in solving cryptid Turing machines. This project was made possible by hundreds of hours of mathematical research.
+
 ## Turing Machines and Beavers
 In the sense of Excalibur, a Turing machine consists of a state, a signed index, a set of instructions, and a sequence of bits. We say that the index denotes the position of the machine's head. At each step, the machine reads the bit at the index, considers the current state, and fetches the corresponding instruction. This instruction tells it to rewrite that bit as a certain boolean, either increment or decrement the head, and switch to a new state. In the broader field of theoretical computer science, a Turing machine is a very real concept, and this is my implementation of it. The Busy Beaver function, given some natural `n`, returns the runtime of the longest running Turing machine that halts with 2 symbols and `n` states. The computation of the sixth value of that function is the goal of this project.
 

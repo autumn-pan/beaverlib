@@ -11,6 +11,7 @@
 #include <time.h>
 #include <stdint.h>
 #include <string.h>
+#include <inttypes.h>
 
 int64_t get_current_time_ms(void) {
     struct timespec ts;
@@ -43,7 +44,6 @@ int main(void) {
 }
 #else
 
-
 int main(void) {
   char src[50];
   char *antihydra = "1RB1RA_0LC1LE_1LD1LC_1LA0LB_1LF1RE_---0RA";
@@ -58,13 +58,22 @@ int main(void) {
   fflush(stdout);
   if(choice == 1)
     strcpy(src, antihydra);
-  if(choice == 2)
+  else if(choice == 2)
     strcpy(src, bb5);
-  if(choice == 3)
+  else if(choice == 3)
   {
     printf("Enter a 6-state, 2-symbol Turing Machine: ");
     scanf("%s", &src); 
   }
+  else
+    return 3;
+
+  uint8_t telemetry;
+  printf("Would you like to enable fsim active telemetry?\n");
+  printf("1. Yes\n2. No\n");
+  scanf("%i", &telemetry);
+  if(telemetry != 2 && telemetry != 1)
+    return 3;
 
   Instruction **instructions = (parse_tm(src));
   TuringMachine *tm = tm_new(instructions);
@@ -81,12 +90,15 @@ int main(void) {
   printf("\n\nForward Analysis:\n");
 
   size_t t1 = get_current_time_ms();
-  run_telemetric_fsim(instructions);
+  if(telemetry == 1)
+    run_telemetric_fsim(instructions, 50);
+  else
+    run_fsim(instructions, 1000000000);
   size_t t2 = get_current_time_ms();
-  printf("Time: %llu\n", t2-t1);
-  printf("Ops per second: %llu\n", 1000000000000/(t2-t1));
+  printf("\nTime: %llu\n", t2-t1);
 
-  dump_tm(tm);
+  if(t2-t1 != 0 && telemetry == 2)
+    printf("Ops per second: %llu\n", 1000000000000/(t2-t1));
 }
 
 #endif

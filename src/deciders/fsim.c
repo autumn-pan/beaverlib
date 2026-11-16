@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <time.h>
+#include <stdbit.h>
 
 #include "deciders/fsim.h"
 #include "tm.h"
@@ -18,29 +19,22 @@ void print_binary(size_t num)
   }
 }
 
-uint8_t get_msb(uint64_t n)
+uint64_t get_msb(uint64_t n)
 {
   if(n == 0)
     return 0;
 
-  uint64_t msb = 1;
-  while(n >>= 1)
-  {
-    msb <<= 1;
-  }
-
-  return msb;
+  return stdc_bit_width(n) - 1;
 }
 
-void run_fsim(Instruction **instructions)
+void run_fsim(Instruction **instructions, size_t steps)
 {
   uint64_t *tape = calloc(FSIM_TAPE_LEN, sizeof(uint64_t));
-
   uint64_t *fi = tape + (FSIM_TAPE_LEN >> 1);
   uint64_t si = 1ULL << 63; // secondary bitmask
   uint8_t state = 0;
 
-  for(int i = 0; i < 1000000000; i++)
+  for(int i = 0; i < steps; i++)
   {
     bool read = (*fi & si) != 0;
 
@@ -83,28 +77,27 @@ void run_fsim(Instruction **instructions)
   printf("Optimized Forward Sim Complete!");
 }
 
-void run_telemetric_fsim(Instruction **instructions)
+void run_telemetric_fsim(Instruction **instructions, size_t steps)
 {
-  uint64_t *tape = calloc(FSIM_TAPE_LEN, sizeof(uint64_t));
+  printf("Beginning telemetric fsim!\n");
+  uint8_t *tape = calloc(FSIM_TAPE_LEN, sizeof(uint64_t));
 
-  uint64_t *fi = tape + (FSIM_TAPE_LEN >> 1);
-  uint64_t si = 1ULL << 63; // secondary bitmask
+  uint8_t *fi = tape + (FSIM_TAPE_LEN >> 1);
+  uint8_t si = 1U << 7; // secondary bitmask
   uint8_t state = 0;
   size_t fi_index = FSIM_TAPE_LEN >> 1;
 
-  for(int i = 0; i < 20; i++)
+  for(int i = 0; i < steps; i++)
   {
-    size_t msb = get_msb(si);
+    uint64_t msb = get_msb(si);
     printf("Step: %llu | ", i);
     for(int j = 0; j < FSIM_TAPE_LEN; j++)
     {
       if(tape[j] != 0)
       {
-        uint8_t num_bytes = sizeof(tape[j])*8;
-        for(int k = num_bytes - 1; k >= 0; k--)
+        for(int k = 7; k >= 0; k--)
         {
-          size_t bit = (tape[j] >> k) & 1;
-          
+          uint8_t bit = (tape[j] >> k) & 1U;
           if(msb == k && fi_index == j)
             printf("[%c:%i]", state + 'A', bit);
           else
@@ -112,7 +105,8 @@ void run_telemetric_fsim(Instruction **instructions)
         }
       }
     }
-    printf("\n\n");
+
+    printf("\n");
     
     bool read = (*fi & si) != 0;
 
@@ -130,7 +124,7 @@ void run_telemetric_fsim(Instruction **instructions)
       si >>= 1;
       if(si == 0)
       {
-        si = 1ULL << 63;
+        si = 1U << 7;
         fi++;
         fi_index++;
       }
@@ -140,7 +134,7 @@ void run_telemetric_fsim(Instruction **instructions)
       si <<= 1;
       if(si == 0)
       {
-        si = 1ULL;
+        si = 1U;
         fi--;
         fi_index--;
       }

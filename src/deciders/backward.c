@@ -120,7 +120,7 @@ DeciderBR *br_decider_gen(TuringMachine *tm)
     {      
       if(table[i][j].next_state == (uint8_t)('-' - 'A'))
       {
-        printf("Halt state found!");
+        printf("Halt state found!\n");
         halt_i = i;
         halt_j = j;
       }
@@ -224,8 +224,6 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 
   for(int i = 0; i < entry->num_pred; i++)
   {
-    printf("Counter: %i", counter);
-    fflush(stdout);
     int8_t dir = (!entry->direction[i] * 2) - 1;
 
     bool new_dir = config->tape->head_dir;
@@ -307,5 +305,3 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
 
   return true;
 }
-
-// 1RA---_0RA0LA_1LA1RE_1RD1RD_1RD1RD_1RD1RD

@@ -5,18 +5,19 @@
 #include "deciders/forward_sim.h"
 #include "config.h"
 #include "deciders/backward.h"
+#include "deciders/fsim.h"
 
 #include <stdio.h>
 #include <time.h>
 #include <stdint.h>
 #include <string.h>
+#include <inttypes.h>
 
 int64_t get_current_time_ms(void) {
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
     return (int64_t)(ts.tv_sec) * 1000 + (int64_t)(ts.tv_nsec) / 1000000;
 }
-
 
 #ifndef BR_ENABLED
 int main(void) {
@@ -42,18 +43,44 @@ int main(void) {
   dump_tm(tm);
 }
 #else
+
 int main(void) {
   char src[50];
+  char *antihydra = "1RB1RA_0LC1LE_1LD1LC_1LA0LB_1LF1RE_---0RA";
+  char *bb5 = "1RB1LC_1RC1RB_1RD0LE_1LA1LD_---0LA_1RA1RA";
 
-  printf("Enter a 6-state, 2-symbol Turing Machine: ");
-  scanf("%s", &src); 
+  uint8_t choice;
+  printf("Select a Turing Machine\n");
+  printf("1. Antihydra\n2. BB(5) Champion\n3. Custom\n");
+  scanf("%i", &choice);
+
+  printf("Choice: %i", choice);
+  fflush(stdout);
+  if(choice == 1)
+    strcpy(src, antihydra);
+  else if(choice == 2)
+    strcpy(src, bb5);
+  else if(choice == 3)
+  {
+    printf("Enter a 6-state, 2-symbol Turing Machine: ");
+    scanf("%s", &src); 
+  }
+  else
+    return 3;
+
+  uint8_t telemetry;
+  printf("Would you like to enable fsim active telemetry?\n");
+  printf("1. Yes\n2. No\n");
+  scanf("%i", &telemetry);
+  if(telemetry != 2 && telemetry != 1)
+    return 3;
 
   Instruction **instructions = (parse_tm(src));
   TuringMachine *tm = tm_new(instructions);
   
   DeciderBR *decider = br_decider_gen(tm);
   if(!br_step_recursive(decider, decider->root))
-    printf("Turing machine failed to be decided within 128 BR steps!\n");
+    printf("Turing machine failed to be decided within 40000 BR steps!\n");
   else
     printf("Turing machine nonhalting!\n");
 
@@ -63,16 +90,15 @@ int main(void) {
   printf("\n\nForward Analysis:\n");
 
   size_t t1 = get_current_time_ms();
-  for(int i = 0; i < 1000000000; i++)
-  {
-    tm_step(tm);
-  } 
-  
+  if(telemetry == 1)
+    run_telemetric_fsim(instructions, 50);
+  else
+    run_fsim(instructions, 1000000000);
   size_t t2 = get_current_time_ms();
-  printf("Time: %llu\n", t2-t1);
-  printf("Ops per second: %llu\n", 1000000000000/(t2-t1));
+  printf("\nTime: %llu\n", t2-t1);
 
-  dump_tm(tm);
+  if(t2-t1 != 0 && telemetry == 2)
+    printf("Ops per second: %llu\n", 1000000000000/(t2-t1));
 }
 
 #endif

@@ -28,4 +28,8 @@ Tape *clone_tape(const Tape *ref);
 void extend_left_tape2(Tape *tape);
 void extend_right_tape2(Tape *tape);
 
+
+
+
+
 #endif

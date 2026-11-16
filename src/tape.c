@@ -218,4 +218,3 @@ void dump_tape2(const Tape *tape)
       printf("%llu ", tape->right_tape[i]);
   }
 }
-

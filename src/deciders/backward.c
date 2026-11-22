@@ -93,7 +93,9 @@ void append_config(HaltConfig *parent, HaltConfig *child)
     printf("Fatal Error: Failed to allocate memory!");
     fflush(stdout);
   }
+
   parent->children[parent->num_children - 1] = child;
+  child->parent = parent;
 }
 
 DeciderBR *br_decider_gen(TuringMachine *tm)
@@ -288,7 +290,7 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     return false;
   }
 
-  if(counter >= 40000)
+  if(counter >= 10)
   {
     printf("Exiting early to avoid stack overflow!\n");
     return false;
@@ -304,4 +306,20 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
   }
 
   return true;
+}
+
+void dump_config(HaltConfig *config)
+{
+  Tape *tmp = clone_tape(config->tape);
+  tmp->head_pos = config->known_inf;
+  
+  move2(tmp, 1);
+  while(tmp->head_dir != 0 && tmp->head_pos < config->known_sup)
+  {
+    if(tmp->head_dir == config->tape->head_dir)
+      if(tmp->head_pos == config->tape->head_pos)
+        printf("[%c:%i]", config->state, read2(tmp));
+    else
+      printf("%i", read2(tmp));
+  }
 }

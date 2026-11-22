@@ -1,10 +1,15 @@
 # ninja log v7
 3	91	1794767890786395169	CMakeFiles/excalibur.dir/src/parser.c.o	680bcf7d02763759
-1	53	1794784218636564681	CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o	bfa061959dc5fea
-1	35	1794799906273850109	CMakeFiles/excalibur.dir/main.c.o	d1a370d99a6f4b7
-37	271	1794799940912863125	excalibur	e54cd3fa9bf47134
-4	60	1794801654191791126	build.ninja	705ac411aa16e15e
-4	60	1794801654191791126	/home/autumn/Documents/mprojects/orangutan/build/cmake_install.cmake	705ac411aa16e15e
-1	53	1794798451163543203	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
-2	50	1794791894947604151	CMakeFiles/excalibur.dir/src/tape.c.o	fc413b3073c37efb
-1	37	1794799940876217757	CMakeFiles/excalibur.dir/src/deciders/fsim.c.o	884225d058b0dfcf
+1	84	1794802586204583370	CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o	bfa061959dc5fea
+3	61	1794802586207124696	CMakeFiles/excalibur.dir/main.c.o	d1a370d99a6f4b7
+84	298	1794802586287917389	excalibur	e54cd3fa9bf47134
+4	60	1795368027356968612	build.ninja	705ac411aa16e15e
+4	60	1795368027355444774	/home/autumn/Documents/mprojects/orangutan/build/cmake_install.cmake	705ac411aa16e15e
+2	73	1794802586205583316	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
+2	74	1794802586206834824	CMakeFiles/excalibur.dir/src/tape.c.o	fc413b3073c37efb
+2	78	1794802586206609195	CMakeFiles/excalibur.dir/src/deciders/fsim.c.o	884225d058b0dfcf
+4	72	1795376832124836195	CMakeFiles/excalibur.dir/src/deciders/backward.c.o	1b31158de787f5aa
+5	72	1795376832125836188	CMakeFiles/excalibur.dir/src/deciders/fsim.c.o	884225d058b0dfcf
+5	72	1795376832127193188	CMakeFiles/excalibur.dir/src/tape.c.o	fc413b3073c37efb
+6	72	1795376832127637373	CMakeFiles/excalibur.dir/main.c.o	d1a370d99a6f4b7
+72	407	1795376832194190409	excalibur	e54cd3fa9bf47134

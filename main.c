@@ -94,6 +94,7 @@ int main(void) {
     run_telemetric_fsim(instructions, 50);
   else
     run_fsim(instructions, 1000000000);
+    
   size_t t2 = get_current_time_ms();
   printf("\nTime: %llu\n", t2-t1);
 

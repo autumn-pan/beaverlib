@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
 size_t counter = 0;
 // Not optimal but proportionally irrelevant
 InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
@@ -259,7 +261,6 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     Tape *new_tape = clone_tape(config->tape);
     new_tape->head_dir = new_dir;
     new_tape->head_pos = new_pos;
-
     /*
     printf("New cloned dir: %i\n", new_tape->head_dir);
     printf("New cloned pos: %i\n\n\n", new_tape->head_pos);
@@ -274,6 +275,9 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
       fflush(stdout);
       return false;
     }
+
+    child->known_inf = config->known_inf;
+    child->known_sup = config->known_sup;
 
     if(new_dir && new_pos > config->known_sup)
       child->known_sup++;
@@ -296,6 +300,8 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     return false;
   }
 
+  dump_config(config);
+
   if(config->num_children == 0)
     return true;
 
@@ -312,14 +318,21 @@ void dump_config(HaltConfig *config)
 {
   Tape *tmp = clone_tape(config->tape);
   tmp->head_pos = config->known_inf;
+  tmp->head_dir = 0;
   
   move2(tmp, 1);
-  while(tmp->head_dir != 0 && tmp->head_pos < config->known_sup)
+
+  printf("\npos: %i, dir: %i, ", config->tape->head_pos, config->tape->head_dir);
+  printf("inf: %i, sup: %i ", config->known_inf, config->known_sup);
+  printf("tmp_p: %i, tmp_d: %i | ", tmp->head_pos, tmp->head_dir);
+
+  while(tmp->head_dir != 1 || tmp->head_pos < config->known_sup)
   {
-    if(tmp->head_dir == config->tape->head_dir)
-      if(tmp->head_pos == config->tape->head_pos)
-        printf("[%c:%i]", config->state, read2(tmp));
+    if(tmp->head_dir == config->tape->head_dir && tmp->head_pos == config->tape->head_pos)
+      printf("[%c:%i]", config->state+'A', read2(tmp));
     else
       printf("%i", read2(tmp));
+
+    move2(tmp, 1);
   }
 }

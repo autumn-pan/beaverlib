@@ -7,8 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 size_t counter = 0;
 // Not optimal but proportionally irrelevant
 InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
@@ -56,6 +54,7 @@ InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
   // Check if there was an allocation error
   if(!entry->direction || !entry->new_symbol || !entry->req_symbol || !entry->state)
     return NULL;
+
 
   for(int i = 0; i < entry->num_pred; i++)
   {
@@ -223,12 +222,13 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     return false;
   }
 
+
   // Fetch the relevant inverse table entry
   InverseEntry *entry = decider->inverse_table[config->state];
 
   for(int i = 0; i < entry->num_pred; i++)
   {
-    int8_t dir = (!entry->direction[i] * 2) - 1;
+    int8_t dir = (entry->direction[i] * 2) - 1;
 
     bool new_dir = config->tape->head_dir;
     int64_t new_pos = config->tape->head_pos;
@@ -266,7 +266,7 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     printf("New cloned pos: %i\n\n\n", new_tape->head_pos);
     */
 
-    write2(new_tape, entry->req_symbol[i]);
+    write2(new_tape, entry->new_symbol[i]);
     child = halt_config_new(entry->state[i], new_tape);
 
     if(!child)
@@ -279,9 +279,9 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     child->known_inf = config->known_inf;
     child->known_sup = config->known_sup;
 
-    if(new_dir && new_pos > config->known_sup)
+    if(new_dir && new_pos >= config->known_sup)
       child->known_sup++;
-    else if(!new_dir && new_pos > config->known_inf)
+    else if(!new_dir && new_pos >= config->known_inf)
       child->known_inf++;
     
     append_config(config, child);
@@ -335,4 +335,50 @@ void dump_config(HaltConfig *config)
 
     move2(tmp, 1);
   }
+}
+
+void dump_config_to_file(HaltConfig *config, FILE *file)
+{
+  Tape *tmp = clone_tape(config->tape);
+  tmp->head_pos = config->known_inf;
+  tmp->head_dir = 0;
+  
+  move2(tmp, 1);
+  while(tmp->head_dir != 1 || tmp->head_pos < config->known_sup)
+  {
+    if(tmp->head_dir == config->tape->head_dir && tmp->head_pos == config->tape->head_pos)
+      fprintf(file, "[%c:%i]", config->state+'A', read2(tmp));
+    else
+      fprintf(file, "%i", read2(tmp));
+
+    move2(tmp, 1);
+  }
+
+  free(tmp);
+}
+
+void dump_graph(HaltConfig *config, FILE *file)
+{
+  for(int i = 0; i < config->num_children; i++)
+  {
+    fprintf(file, "\"");
+    dump_config_to_file(config, file);
+    fprintf(file, "\" -> \"");
+    dump_config_to_file(config->children[i], file);
+    fprintf(file, "\"");
+    fprintf(file, "\n");
+
+    dump_graph(config->children[i], file);
+  }
+}
+
+void gen_graphviz(HaltConfig *root) {
+  FILE *file = fopen("out.txt", "w");
+
+  if(!file)
+    return;
+
+  fprintf(file, "digraph B {\n");
+  dump_graph(root, file);
+  fprintf(file, "}");
 }

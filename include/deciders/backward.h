@@ -60,5 +60,6 @@ void dump_br_table(DeciderBR *decider);
 void br_step(DeciderBR *decider, HaltConfig *config);
 bool br_step_recursive(DeciderBR *decider, HaltConfig *config);
 void dump_config(HaltConfig *config);
+void gen_graphviz(HaltConfig *root);
 
 #endif

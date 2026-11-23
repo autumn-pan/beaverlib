@@ -86,24 +86,66 @@ CMakeFiles/excalibur.dir/src/parser.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/excalibur.dir/src/parser.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/autumn/Documents/mprojects/orangutan/src/parser.c -o CMakeFiles/excalibur.dir/src/parser.c.s
 
-CMakeFiles/excalibur.dir/src/forward_sim.c.o: CMakeFiles/excalibur.dir/flags.make
-CMakeFiles/excalibur.dir/src/forward_sim.c.o: /home/autumn/Documents/mprojects/orangutan/src/forward_sim.c
-CMakeFiles/excalibur.dir/src/forward_sim.c.o: CMakeFiles/excalibur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/excalibur.dir/src/forward_sim.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/excalibur.dir/src/forward_sim.c.o -MF CMakeFiles/excalibur.dir/src/forward_sim.c.o.d -o CMakeFiles/excalibur.dir/src/forward_sim.c.o -c /home/autumn/Documents/mprojects/orangutan/src/forward_sim.c
+CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o: CMakeFiles/excalibur.dir/flags.make
+CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o: /home/autumn/Documents/mprojects/orangutan/src/deciders/forward_sim.c
+CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o: CMakeFiles/excalibur.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o -MF CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o.d -o CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o -c /home/autumn/Documents/mprojects/orangutan/src/deciders/forward_sim.c
 
-CMakeFiles/excalibur.dir/src/forward_sim.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/excalibur.dir/src/forward_sim.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/autumn/Documents/mprojects/orangutan/src/forward_sim.c > CMakeFiles/excalibur.dir/src/forward_sim.c.i
+CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/autumn/Documents/mprojects/orangutan/src/deciders/forward_sim.c > CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.i
 
-CMakeFiles/excalibur.dir/src/forward_sim.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/excalibur.dir/src/forward_sim.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/autumn/Documents/mprojects/orangutan/src/forward_sim.c -o CMakeFiles/excalibur.dir/src/forward_sim.c.s
+CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/autumn/Documents/mprojects/orangutan/src/deciders/forward_sim.c -o CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.s
+
+CMakeFiles/excalibur.dir/src/deciders/backward.c.o: CMakeFiles/excalibur.dir/flags.make
+CMakeFiles/excalibur.dir/src/deciders/backward.c.o: /home/autumn/Documents/mprojects/orangutan/src/deciders/backward.c
+CMakeFiles/excalibur.dir/src/deciders/backward.c.o: CMakeFiles/excalibur.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/excalibur.dir/src/deciders/backward.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/excalibur.dir/src/deciders/backward.c.o -MF CMakeFiles/excalibur.dir/src/deciders/backward.c.o.d -o CMakeFiles/excalibur.dir/src/deciders/backward.c.o -c /home/autumn/Documents/mprojects/orangutan/src/deciders/backward.c
+
+CMakeFiles/excalibur.dir/src/deciders/backward.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/excalibur.dir/src/deciders/backward.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/autumn/Documents/mprojects/orangutan/src/deciders/backward.c > CMakeFiles/excalibur.dir/src/deciders/backward.c.i
+
+CMakeFiles/excalibur.dir/src/deciders/backward.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/excalibur.dir/src/deciders/backward.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/autumn/Documents/mprojects/orangutan/src/deciders/backward.c -o CMakeFiles/excalibur.dir/src/deciders/backward.c.s
+
+CMakeFiles/excalibur.dir/src/deciders/fsim.c.o: CMakeFiles/excalibur.dir/flags.make
+CMakeFiles/excalibur.dir/src/deciders/fsim.c.o: /home/autumn/Documents/mprojects/orangutan/src/deciders/fsim.c
+CMakeFiles/excalibur.dir/src/deciders/fsim.c.o: CMakeFiles/excalibur.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/excalibur.dir/src/deciders/fsim.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/excalibur.dir/src/deciders/fsim.c.o -MF CMakeFiles/excalibur.dir/src/deciders/fsim.c.o.d -o CMakeFiles/excalibur.dir/src/deciders/fsim.c.o -c /home/autumn/Documents/mprojects/orangutan/src/deciders/fsim.c
+
+CMakeFiles/excalibur.dir/src/deciders/fsim.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/excalibur.dir/src/deciders/fsim.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/autumn/Documents/mprojects/orangutan/src/deciders/fsim.c > CMakeFiles/excalibur.dir/src/deciders/fsim.c.i
+
+CMakeFiles/excalibur.dir/src/deciders/fsim.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/excalibur.dir/src/deciders/fsim.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/autumn/Documents/mprojects/orangutan/src/deciders/fsim.c -o CMakeFiles/excalibur.dir/src/deciders/fsim.c.s
+
+CMakeFiles/excalibur.dir/src/tape.c.o: CMakeFiles/excalibur.dir/flags.make
+CMakeFiles/excalibur.dir/src/tape.c.o: /home/autumn/Documents/mprojects/orangutan/src/tape.c
+CMakeFiles/excalibur.dir/src/tape.c.o: CMakeFiles/excalibur.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/excalibur.dir/src/tape.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/excalibur.dir/src/tape.c.o -MF CMakeFiles/excalibur.dir/src/tape.c.o.d -o CMakeFiles/excalibur.dir/src/tape.c.o -c /home/autumn/Documents/mprojects/orangutan/src/tape.c
+
+CMakeFiles/excalibur.dir/src/tape.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/excalibur.dir/src/tape.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/autumn/Documents/mprojects/orangutan/src/tape.c > CMakeFiles/excalibur.dir/src/tape.c.i
+
+CMakeFiles/excalibur.dir/src/tape.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/excalibur.dir/src/tape.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/autumn/Documents/mprojects/orangutan/src/tape.c -o CMakeFiles/excalibur.dir/src/tape.c.s
 
 CMakeFiles/excalibur.dir/main.c.o: CMakeFiles/excalibur.dir/flags.make
 CMakeFiles/excalibur.dir/main.c.o: /home/autumn/Documents/mprojects/orangutan/main.c
 CMakeFiles/excalibur.dir/main.c.o: CMakeFiles/excalibur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/excalibur.dir/main.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/excalibur.dir/main.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/excalibur.dir/main.c.o -MF CMakeFiles/excalibur.dir/main.c.o.d -o CMakeFiles/excalibur.dir/main.c.o -c /home/autumn/Documents/mprojects/orangutan/main.c
 
 CMakeFiles/excalibur.dir/main.c.i: cmake_force
@@ -117,19 +159,25 @@ CMakeFiles/excalibur.dir/main.c.s: cmake_force
 # Object files for target excalibur
 excalibur_OBJECTS = \
 "CMakeFiles/excalibur.dir/src/parser.c.o" \
-"CMakeFiles/excalibur.dir/src/forward_sim.c.o" \
+"CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o" \
+"CMakeFiles/excalibur.dir/src/deciders/backward.c.o" \
+"CMakeFiles/excalibur.dir/src/deciders/fsim.c.o" \
+"CMakeFiles/excalibur.dir/src/tape.c.o" \
 "CMakeFiles/excalibur.dir/main.c.o"
 
 # External object files for target excalibur
 excalibur_EXTERNAL_OBJECTS =
 
 excalibur: CMakeFiles/excalibur.dir/src/parser.c.o
-excalibur: CMakeFiles/excalibur.dir/src/forward_sim.c.o
+excalibur: CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o
+excalibur: CMakeFiles/excalibur.dir/src/deciders/backward.c.o
+excalibur: CMakeFiles/excalibur.dir/src/deciders/fsim.c.o
+excalibur: CMakeFiles/excalibur.dir/src/tape.c.o
 excalibur: CMakeFiles/excalibur.dir/main.c.o
 excalibur: CMakeFiles/excalibur.dir/build.make
 excalibur: CMakeFiles/excalibur.dir/compiler_depend.ts
 excalibur: CMakeFiles/excalibur.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable excalibur"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable excalibur"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/excalibur.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

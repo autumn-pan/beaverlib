@@ -85,12 +85,12 @@ clean: CMakeFiles/excalibur.dir/clean
 CMakeFiles/excalibur.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=1,2,3,4 "Built target excalibur"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target excalibur"
 .PHONY : CMakeFiles/excalibur.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/excalibur.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/autumn/Documents/mprojects/orangutan/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/autumn/Documents/mprojects/orangutan/build/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/excalibur.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/autumn/Documents/mprojects/orangutan/build/CMakeFiles 0
 .PHONY : CMakeFiles/excalibur.dir/rule
@@ -102,7 +102,7 @@ excalibur: CMakeFiles/excalibur.dir/rule
 # codegen rule for target.
 CMakeFiles/excalibur.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target excalibur"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/autumn/Documents/mprojects/orangutan/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Finished codegen for target excalibur"
 .PHONY : CMakeFiles/excalibur.dir/codegen
 
 # clean rule for target.

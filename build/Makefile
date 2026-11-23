@@ -153,29 +153,77 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/main.c.s
 .PHONY : main.c.s
 
-src/forward_sim.o: src/forward_sim.c.o
-.PHONY : src/forward_sim.o
+src/deciders/backward.o: src/deciders/backward.c.o
+.PHONY : src/deciders/backward.o
 
 # target to build an object file
-src/forward_sim.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/forward_sim.c.o
-.PHONY : src/forward_sim.c.o
+src/deciders/backward.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/deciders/backward.c.o
+.PHONY : src/deciders/backward.c.o
 
-src/forward_sim.i: src/forward_sim.c.i
-.PHONY : src/forward_sim.i
+src/deciders/backward.i: src/deciders/backward.c.i
+.PHONY : src/deciders/backward.i
 
 # target to preprocess a source file
-src/forward_sim.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/forward_sim.c.i
-.PHONY : src/forward_sim.c.i
+src/deciders/backward.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/deciders/backward.c.i
+.PHONY : src/deciders/backward.c.i
 
-src/forward_sim.s: src/forward_sim.c.s
-.PHONY : src/forward_sim.s
+src/deciders/backward.s: src/deciders/backward.c.s
+.PHONY : src/deciders/backward.s
 
 # target to generate assembly for a file
-src/forward_sim.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/forward_sim.c.s
-.PHONY : src/forward_sim.c.s
+src/deciders/backward.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/deciders/backward.c.s
+.PHONY : src/deciders/backward.c.s
+
+src/deciders/forward_sim.o: src/deciders/forward_sim.c.o
+.PHONY : src/deciders/forward_sim.o
+
+# target to build an object file
+src/deciders/forward_sim.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.o
+.PHONY : src/deciders/forward_sim.c.o
+
+src/deciders/forward_sim.i: src/deciders/forward_sim.c.i
+.PHONY : src/deciders/forward_sim.i
+
+# target to preprocess a source file
+src/deciders/forward_sim.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.i
+.PHONY : src/deciders/forward_sim.c.i
+
+src/deciders/forward_sim.s: src/deciders/forward_sim.c.s
+.PHONY : src/deciders/forward_sim.s
+
+# target to generate assembly for a file
+src/deciders/forward_sim.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/deciders/forward_sim.c.s
+.PHONY : src/deciders/forward_sim.c.s
+
+src/deciders/fsim.o: src/deciders/fsim.c.o
+.PHONY : src/deciders/fsim.o
+
+# target to build an object file
+src/deciders/fsim.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/deciders/fsim.c.o
+.PHONY : src/deciders/fsim.c.o
+
+src/deciders/fsim.i: src/deciders/fsim.c.i
+.PHONY : src/deciders/fsim.i
+
+# target to preprocess a source file
+src/deciders/fsim.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/deciders/fsim.c.i
+.PHONY : src/deciders/fsim.c.i
+
+src/deciders/fsim.s: src/deciders/fsim.c.s
+.PHONY : src/deciders/fsim.s
+
+# target to generate assembly for a file
+src/deciders/fsim.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/deciders/fsim.c.s
+.PHONY : src/deciders/fsim.c.s
 
 src/parser.o: src/parser.c.o
 .PHONY : src/parser.o
@@ -201,6 +249,30 @@ src/parser.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/parser.c.s
 .PHONY : src/parser.c.s
 
+src/tape.o: src/tape.c.o
+.PHONY : src/tape.o
+
+# target to build an object file
+src/tape.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/tape.c.o
+.PHONY : src/tape.c.o
+
+src/tape.i: src/tape.c.i
+.PHONY : src/tape.i
+
+# target to preprocess a source file
+src/tape.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/tape.c.i
+.PHONY : src/tape.c.i
+
+src/tape.s: src/tape.c.s
+.PHONY : src/tape.s
+
+# target to generate assembly for a file
+src/tape.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/excalibur.dir/build.make CMakeFiles/excalibur.dir/src/tape.c.s
+.PHONY : src/tape.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,12 +285,21 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/forward_sim.o"
-	@echo "... src/forward_sim.i"
-	@echo "... src/forward_sim.s"
+	@echo "... src/deciders/backward.o"
+	@echo "... src/deciders/backward.i"
+	@echo "... src/deciders/backward.s"
+	@echo "... src/deciders/forward_sim.o"
+	@echo "... src/deciders/forward_sim.i"
+	@echo "... src/deciders/forward_sim.s"
+	@echo "... src/deciders/fsim.o"
+	@echo "... src/deciders/fsim.i"
+	@echo "... src/deciders/fsim.s"
 	@echo "... src/parser.o"
 	@echo "... src/parser.i"
 	@echo "... src/parser.s"
+	@echo "... src/tape.o"
+	@echo "... src/tape.i"
+	@echo "... src/tape.s"
 .PHONY : help
 
 

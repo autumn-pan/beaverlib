@@ -62,4 +62,12 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config);
 void dump_config(HaltConfig *config);
 void gen_graphviz(HaltConfig *root);
 
+typedef struct {
+  HaltConfig *old_list;
+  HaltConfig *new_list;
+
+  HaltConfig *root;
+  InverseEntry **inverse_table;
+} BFSBR;
+
 #endif

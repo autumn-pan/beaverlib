@@ -8,4 +8,6 @@
 void run_fsim(Instruction **instructions, size_t steps);
 void run_telemetric_fsim(Instruction **instructions, size_t steps);
 
+void fsim2(Instruction **instructions);
+
 #endif

@@ -84,6 +84,8 @@ int main(void) {
   else
     printf("Turing machine nonhalting!\n");
 
+  gen_graphviz(decider->root);
+
   printf("Req State: %c\n", decider->root->children[0]->state + 'A');
   dump_br_table(decider);
 
@@ -94,6 +96,7 @@ int main(void) {
     run_telemetric_fsim(instructions, 50);
   else
     run_fsim(instructions, 1000000000);
+
   size_t t2 = get_current_time_ms();
   printf("\nTime: %llu\n", t2-t1);
 

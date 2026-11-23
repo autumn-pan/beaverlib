@@ -37,6 +37,9 @@ typedef struct halt_config
   size_t num_children;
   uint8_t state;
 
+  struct halt_config *parent;
+  bool has_parent;
+
   // Supremum and infimum of the known intervals on the tape
   // Since the tape is discrete, the indices themselves are not included
   size_t known_sup;
@@ -56,5 +59,15 @@ DeciderBR *br_decider_gen(TuringMachine *tm);
 void dump_br_table(DeciderBR *decider);
 void br_step(DeciderBR *decider, HaltConfig *config);
 bool br_step_recursive(DeciderBR *decider, HaltConfig *config);
+void dump_config(HaltConfig *config);
+void gen_graphviz(HaltConfig *root);
+
+typedef struct {
+  HaltConfig *old_list;
+  HaltConfig *new_list;
+
+  HaltConfig *root;
+  InverseEntry **inverse_table;
+} BFSBR;
 
 #endif

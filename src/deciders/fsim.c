@@ -150,3 +150,82 @@ void run_telemetric_fsim(Instruction **instructions, size_t steps)
 
   printf("Optimized Forward Sim Complete!");
 }
+
+// don't run this
+void fsim2(Instruction **instructions)
+{
+  FILE *file = fopen("tm.txt", "w");
+
+  printf("Beginning telemetric fsim!\n");
+  uint8_t *tape = calloc(FSIM_TAPE_LEN, sizeof(uint64_t));
+
+  uint8_t *fi = tape + (FSIM_TAPE_LEN >> 1);
+  uint8_t si = 1U << 7; // secondary bitmask
+  uint8_t state = 0;
+  size_t fi_index = FSIM_TAPE_LEN >> 1;
+
+  for(size_t a = 0; a < 10000; a++)
+    {
+      uint64_t msb = get_msb(si);
+
+      fprintf(file, "Step: %llu | ", a*1000000000);
+      for(int j = 0; j < FSIM_TAPE_LEN; j++)
+      {
+        if(tape[j] != 0)
+        {
+          for(int k = 7; k >= 0; k--)
+          {
+            uint8_t bit = (tape[j] >> k) & 1U;
+            if(msb == k && fi_index == j)
+              printf("[%c:%i]", state + 'A', bit);
+            else
+              printf("%i", bit);
+          }
+        }
+      }
+      fflush(file);
+    for(int i = 0; i < 1000000000; i++)
+    {
+      fprintf(file, "\n");
+      
+      bool read = (*fi & si) != 0;
+
+      Instruction instr = instructions[read][state];
+
+      // Write the necessary value
+      if(instr.write)
+        *fi |= si;
+      else
+        *fi &= ~si;
+
+      // Move the machine head
+      if(instr.move)
+      {
+        si >>= 1;
+        if(si == 0)
+        {
+          si = 1U << 7;
+          fi++;
+          fi_index++;
+        }
+      }
+      else
+      {
+        si <<= 1;
+        if(si == 0)
+        {
+          si = 1U;
+          fi--;
+          fi_index--;
+        }
+      }
+
+      state = instr.next_state;
+      if(state > 5)
+      {
+        fprintf(file, "Halted in %llu!\n", i + 1);
+        break;
+      }
+    }
+  }
+}

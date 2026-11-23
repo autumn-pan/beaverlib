@@ -211,10 +211,13 @@ void dump_tape2(const Tape *tape)
     if(tape->left_tape[i] != 0)
       printf("%llu ", tape->left_tape[i]);
   }
+
   printf("\n\n");
   for(int i = 0; i < tape->right_tape_size; i++)
   {
     if(tape->right_tape[i] != 0)
       printf("%llu ", tape->right_tape[i]);
   }
+
+  
 }

@@ -55,6 +55,7 @@ InverseEntry *inverse_entry_gen(TuringMachine *tm, uint8_t state)
   if(!entry->direction || !entry->new_symbol || !entry->req_symbol || !entry->state)
     return NULL;
 
+
   for(int i = 0; i < entry->num_pred; i++)
   {
     entry->direction[i] = !candidate_list[i].move;
@@ -93,7 +94,9 @@ void append_config(HaltConfig *parent, HaltConfig *child)
     printf("Fatal Error: Failed to allocate memory!");
     fflush(stdout);
   }
+
   parent->children[parent->num_children - 1] = child;
+  child->parent = parent;
 }
 
 DeciderBR *br_decider_gen(TuringMachine *tm)
@@ -219,12 +222,13 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     return false;
   }
 
+
   // Fetch the relevant inverse table entry
   InverseEntry *entry = decider->inverse_table[config->state];
 
   for(int i = 0; i < entry->num_pred; i++)
   {
-    int8_t dir = (!entry->direction[i] * 2) - 1;
+    int8_t dir = (entry->direction[i] * 2) - 1;
 
     bool new_dir = config->tape->head_dir;
     int64_t new_pos = config->tape->head_pos;
@@ -257,13 +261,12 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     Tape *new_tape = clone_tape(config->tape);
     new_tape->head_dir = new_dir;
     new_tape->head_pos = new_pos;
-
     /*
     printf("New cloned dir: %i\n", new_tape->head_dir);
     printf("New cloned pos: %i\n\n\n", new_tape->head_pos);
     */
 
-    write2(new_tape, entry->req_symbol[i]);
+    write2(new_tape, entry->new_symbol[i]);
     child = halt_config_new(entry->state[i], new_tape);
 
     if(!child)
@@ -273,9 +276,12 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
       return false;
     }
 
-    if(new_dir && new_pos > config->known_sup)
+    child->known_inf = config->known_inf;
+    child->known_sup = config->known_sup;
+
+    if(new_dir && new_pos >= config->known_sup)
       child->known_sup++;
-    else if(!new_dir && new_pos > config->known_inf)
+    else if(!new_dir && new_pos >= config->known_inf)
       child->known_inf++;
     
     append_config(config, child);
@@ -288,11 +294,13 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     return false;
   }
 
-  if(counter >= 40000)
+  if(counter >= 40)
   {
     printf("Exiting early to avoid stack overflow!\n");
     return false;
   }
+
+  dump_config(config);
 
   if(config->num_children == 0)
     return true;
@@ -304,4 +312,139 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
   }
 
   return true;
+}
+
+void dump_config(HaltConfig *config)
+{
+  Tape *tmp = clone_tape(config->tape);
+  tmp->head_pos = config->known_inf;
+  tmp->head_dir = 0;
+  
+  move2(tmp, 1);
+
+  printf("\npos: %i, dir: %i, ", config->tape->head_pos, config->tape->head_dir);
+  printf("inf: %i, sup: %i ", config->known_inf, config->known_sup);
+  printf("tmp_p: %i, tmp_d: %i | ", tmp->head_pos, tmp->head_dir);
+
+  while(tmp->head_dir != 1 || tmp->head_pos < config->known_sup)
+  {
+    if(tmp->head_dir == config->tape->head_dir && tmp->head_pos == config->tape->head_pos)
+      printf("[%c:%i]", config->state+'A', read2(tmp));
+    else
+      printf("%i", read2(tmp));
+
+    move2(tmp, 1);
+  }
+}
+
+void dump_config_to_file(HaltConfig *config, FILE *file)
+{
+  Tape *tmp = clone_tape(config->tape);
+  tmp->head_pos = config->known_inf;
+  tmp->head_dir = 0;
+  
+  move2(tmp, 1);
+  while(tmp->head_dir != 1 || tmp->head_pos < config->known_sup)
+  {
+    if(tmp->head_dir == config->tape->head_dir && tmp->head_pos == config->tape->head_pos)
+      fprintf(file, "[%c:%i]", config->state+'A', read2(tmp));
+    else
+      fprintf(file, "%i", read2(tmp));
+
+    move2(tmp, 1);
+  }
+
+  free(tmp);
+}
+
+void dump_graph(HaltConfig *config, FILE *file)
+{
+  for(int i = 0; i < config->num_children; i++)
+  {
+    fprintf(file, "\"");
+    dump_config_to_file(config, file);
+    fprintf(file, "\" -> \"");
+    dump_config_to_file(config->children[i], file);
+    fprintf(file, "\"");
+    fprintf(file, "\n");
+
+    dump_graph(config->children[i], file);
+  }
+}
+
+void gen_graphviz(HaltConfig *root) {
+  FILE *file = fopen("out.txt", "w");
+
+  if(!file)
+    return;
+
+  fprintf(file, "digraph B {\n");
+  dump_graph(root, file);
+  fprintf(file, "}");
+}
+
+
+BFSBR *gen_BFSBR(TuringMachine *tm)
+{
+  BFSBR *decider = malloc(sizeof(BFSBR));
+
+  if(!decider)
+    return NULL;
+
+  DeciderBR *br = br_decider_gen(tm);
+  decider->inverse_table = br->inverse_table;
+  decider->root = br->root;
+
+  return decider;
+}
+
+void append_BFSBR_l1(BFSBR *decider, HaltConfig *child)
+{
+
+}
+
+void br_bfs_step(BFSBR *decider, HaltConfig *config)
+{
+  // Fetch the relevant inverse table entry
+  InverseEntry *entry = decider->inverse_table[config->state];
+
+  for(int i = 0; i < entry->num_pred; i++)
+  {
+    int8_t dir = (!entry->direction[i] << 1) - 1;
+    uint8_t req_state = entry->state[i];
+    bool req_symbol = entry->req_symbol;
+
+    bool new_dir = config->tape->head_dir;
+    bool new_pos = config->tape->head_pos;
+
+    if((int64_t)config->tape->head_pos + dir < 0)
+    {
+      new_dir = !config->tape->head_dir;
+      new_pos = 0;
+    }
+    else
+      new_pos = new_pos + dir;
+
+    printf("New dir: %i, New pos: %i\n", new_dir, new_pos);
+    printf("Read: %i\n", read_to_pos(config->tape, new_dir, new_pos));
+    printf("Write value: %i\n", entry->req_symbol[i]);
+    if(entry->req_symbol[i] != read_to_pos(config->tape, new_dir, new_pos))
+      if((new_dir && new_pos < config->known_sup) || (!new_dir && new_pos < config->known_inf))
+        continue;
+
+    HaltConfig *child;
+
+    Tape *new_tape = clone_tape(config->tape);
+    new_tape->head_dir = new_dir;
+    new_tape->head_pos = new_pos;
+    write2(new_tape, entry->req_symbol[i]);
+    child = halt_config_new(entry->state[i], new_tape);
+
+    if(new_dir && new_pos > config->known_sup)
+      child->known_sup++;
+    else if(!new_dir && new_pos > config->known_inf)
+      child->known_inf++;
+    
+    append_config(config, child);
+  }
 }

@@ -20,6 +20,8 @@ typedef struct {
   size_t num_leaves;
 } InverseMacro;
 
+
+
 typedef struct {
   Instruction *instructions;
   // Number of primary macros remains at 6
@@ -28,8 +30,5 @@ typedef struct {
   InverseMacro *secondarsy_macros;
   size_t num_sec_macros;
 } IBR;
-
-
-
 
 #endif

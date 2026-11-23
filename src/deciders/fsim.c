@@ -150,8 +150,3 @@ void run_telemetric_fsim(Instruction **instructions, size_t steps)
 
   printf("Optimized Forward Sim Complete!");
 }
-
-void gfsim_step(GenForwardSim *gfsim)
-{
-  // do its thing
-}

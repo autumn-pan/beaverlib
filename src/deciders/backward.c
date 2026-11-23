@@ -294,7 +294,7 @@ bool br_step_recursive(DeciderBR *decider, HaltConfig *config)
     return false;
   }
 
-  if(counter >= 10)
+  if(counter >= 40)
   {
     printf("Exiting early to avoid stack overflow!\n");
     return false;
